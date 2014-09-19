@@ -21,6 +21,9 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Command\Dispatchable;
+use Symfony\Component\Console\Command\ParsedCommand;
+
 
 /**
  * Base class for all commands.
@@ -29,7 +32,7 @@ use Symfony\Component\Console\Helper\HelperSet;
  *
  * @api
  */
-class Command
+abstract class Command implements Dispatchable
 {
     private $application;
     private $name;
@@ -41,7 +44,7 @@ class Command
     private $ignoreValidationErrors = false;
     private $applicationDefinitionMerged = false;
     private $applicationDefinitionMergedWithArgs = false;
-    private $code;
+
     private $synopsis;
     private $helperSet;
 
@@ -202,7 +205,7 @@ class Command
      * @param InputInterface  $input  An InputInterface instance
      * @param OutputInterface $output An OutputInterface instance
      *
-     * @return int     The command exit code
+     * @return array An array of [null, $callable, $parameters] that should be called for the command
      *
      * @throws \Exception
      *
@@ -245,41 +248,10 @@ class Command
         }
 
         $input->validate();
+        $callable = $this->getCallable();
+        $params = $this->parseInput($input, $output);
 
-        if ($this->code) {
-            $statusCode = call_user_func($this->code, $input, $output);
-        } else {
-            $statusCode = $this->execute($input, $output);
-        }
-
-        return is_numeric($statusCode) ? (int) $statusCode : 0;
-    }
-
-    /**
-     * Sets the code to execute when running this command.
-     *
-     * If this method is used, it overrides the code defined
-     * in the execute() method.
-     *
-     * @param callable $code A callable(InputInterface $input, OutputInterface $output)
-     *
-     * @return Command The current instance
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @see execute()
-     *
-     * @api
-     */
-    public function setCode($code)
-    {
-        if (!is_callable($code)) {
-            throw new \InvalidArgumentException('Invalid callable provided to Command::setCode.');
-        }
-
-        $this->code = $code;
-
-        return $this;
+        return new ParsedCommand($callable, $params, $input, $output);
     }
 
     /**

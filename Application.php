@@ -35,10 +35,9 @@ use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Console\Helper\TableHelper;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\Console\Event\ConsoleExceptionEvent;
-use Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Console\Command\GenericCommand;
+use Symfony\Component\Console\Command\ParsedCommand;
+
 
 /**
  * An Application is the container for a collection of commands.
@@ -92,25 +91,21 @@ class Application
             $this->add($command);
         }
     }
-
-    public function setDispatcher(EventDispatcherInterface $dispatcher)
-    {
-        $this->dispatcher = $dispatcher;
-    }
-
+    
     /**
      * Runs the current application.
      *
      * @param InputInterface  $input  An Input instance
      * @param OutputInterface $output An Output instance
      *
-     * @return int 0 if everything went fine, or an error code
+     * @return ParsedCommand An array of [$callable, $parameters] that should be called for the command or 
+     * null if there was an exception.
      *
      * @throws \Exception When doRun returns Exception
      *
      * @api
      */
-    public function run(InputInterface $input = null, OutputInterface $output = null)
+    public function parseCommandLine(InputInterface $input = null, OutputInterface $output = null)
     {
         if (null === $input) {
             $input = new ArgvInput();
@@ -123,38 +118,25 @@ class Application
         $this->configureIO($input, $output);
 
         try {
-            $exitCode = $this->doRun($input, $output);
+            $callableAndParams = $this->doRun($input, $output);
+
+            return $callableAndParams;
         } catch (\Exception $e) {
-            if (!$this->catchExceptions) {
-                throw $e;
-            }
 
-            if ($output instanceof ConsoleOutputInterface) {
-                $this->renderException($e, $output->getErrorOutput());
-            } else {
-                $this->renderException($e, $output);
-            }
+            $output = new BufferedOutput();
+            $this->renderException($e, $output);
 
-            $exitCode = $e->getCode();
-            if (is_numeric($exitCode)) {
-                $exitCode = (int) $exitCode;
-                if (0 === $exitCode) {
-                    $exitCode = 1;
-                }
-            } else {
-                $exitCode = 1;
-            }
+            $errorString = $output->fetch();
+
+//            if ($output instanceof ConsoleOutputInterface) {
+//                $this->renderException($e, $output->getErrorOutput());
+//            } else {
+//                $this->renderException($e, $output);
+//            }
+            
+            
+            return [$e, null, $errorString];
         }
-
-        if ($this->autoExit) {
-            if ($exitCode > 255) {
-                $exitCode = 255;
-            }
-
-            exit($exitCode);
-        }
-
-        return $exitCode;
     }
 
     /**
@@ -163,7 +145,7 @@ class Application
      * @param InputInterface  $input  An Input instance
      * @param OutputInterface $output An Output instance
      *
-     * @return int 0 if everything went fine, or an error code
+     * @return array An array of [$callable, $parameters] that should be called for the command
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
@@ -192,10 +174,10 @@ class Application
         $command = $this->find($name);
 
         $this->runningCommand = $command;
-        $exitCode = $this->doRunCommand($command, $input, $output);
+        $callableAndParams = $this->doRunCommand($command, $input, $output);
         $this->runningCommand = null;
 
-        return $exitCode;
+        return $callableAndParams;
     }
 
     /**
@@ -368,9 +350,9 @@ class Application
      *
      * @api
      */
-    public function register($name)
+    public function register($name, $callable)
     {
-        return $this->add(new Command($name));
+        return $this->add(new GenericCommand($callable, $name));
     }
 
     /**
@@ -866,18 +848,11 @@ class Application
     }
 
     /**
-     * Runs the current command.
-     *
-     * If an event dispatcher has been attached to the application,
-     * events are also dispatched during the life-cycle of the command.
-     *
-     * @param Command         $command A Command instance
-     * @param InputInterface  $input   An Input instance
-     * @param OutputInterface $output  An Output instance
-     *
-     * @return int 0 if everything went fine, or an error code
-     *
-     * @throws \Exception when the command being run threw an exception
+     * @param Command $command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return array An array of [$callable, $parameters] that should be called for the command
+     * @throws \Exception
      */
     protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
     {
@@ -886,34 +861,8 @@ class Application
                 $helper->setInput($input);
             }
         }
-
-        if (null === $this->dispatcher) {
-            return $command->run($input, $output);
-        }
-
-        $event = new ConsoleCommandEvent($command, $input, $output);
-        $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
-
-        if ($event->commandShouldRun()) {
-            try {
-                $exitCode = $command->run($input, $output);
-            } catch (\Exception $e) {
-                $event = new ConsoleTerminateEvent($command, $input, $output, $e->getCode());
-                $this->dispatcher->dispatch(ConsoleEvents::TERMINATE, $event);
-
-                $event = new ConsoleExceptionEvent($command, $input, $output, $e, $event->getExitCode());
-                $this->dispatcher->dispatch(ConsoleEvents::EXCEPTION, $event);
-
-                throw $event->getException();
-            }
-        } else {
-            $exitCode = ConsoleCommandEvent::RETURN_CODE_DISABLED;
-        }
-
-        $event = new ConsoleTerminateEvent($command, $input, $output, $exitCode);
-        $this->dispatcher->dispatch(ConsoleEvents::TERMINATE, $event);
-
-        return $event->getExitCode();
+        
+        return $command->run($input, $output);
     }
 
     /**

@@ -109,7 +109,7 @@ EOF
 
                 $ret = $process->getExitCode();
             } else {
-                $ret = $this->application->run(new StringInput($command), $this->output);
+                $ret = $this->application->parseCommandLine(new StringInput($command), $this->output);
             }
 
             if (0 !== $ret) {

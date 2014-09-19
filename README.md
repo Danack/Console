@@ -1,3 +1,13 @@
+
+Disclaimer
+==========
+
+This is not the Symfony console - it is a forking refactor to:
+
+* To split the 'routing' and dispatching of commands.
+* Remove the events, because they don't belong in what should be a reasonable, simple piece of code.
+
+
 Console Component
 =================
 

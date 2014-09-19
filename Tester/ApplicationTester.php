@@ -73,7 +73,7 @@ class ApplicationTester
             $this->output->setVerbosity($options['verbosity']);
         }
 
-        return $this->statusCode = $this->application->run($this->input, $this->output);
+        return $this->statusCode = $this->application->parseCommandLine($this->input, $this->output);
     }
 
     /**

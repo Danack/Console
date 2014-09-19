@@ -25,10 +25,8 @@ use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Tester\ApplicationTester;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\Console\Event\ConsoleExceptionEvent;
-use Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+
+
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
 {
@@ -563,7 +561,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $_SERVER['argv'] = array('cli.php', 'foo:bar1');
 
         ob_start();
-        $application->run();
+        $application->parseCommandLine();
         ob_end_clean();
 
         $this->assertInstanceOf('Symfony\Component\Console\Input\ArgvInput', $command->input, '->run() creates an ArgvInput by default if none is given');
@@ -663,10 +661,10 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $output = new StreamOutput(fopen('php://memory', 'w', false));
 
         $input = new ArgvInput(array('cli.php', '-v', 'foo:bar'));
-        $application->run($input, $output);
+        $application->parseCommandLine($input, $output);
 
         $input = new ArgvInput(array('cli.php', '--verbose', 'foo:bar'));
-        $application->run($input, $output);
+        $application->parseCommandLine($input, $output);
     }
 
     public function testRunReturnsIntegerExitCode()
@@ -716,7 +714,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $input = new ArrayInput(array('command' => 'foo'));
         $output = new NullOutput();
-        $application->run($input, $output);
+        $application->parseCommandLine($input, $output);
     }
 
     public function getAddingAlreadySetDefinitionElementData()
@@ -874,38 +872,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $tester->run(array('command' => 'foo'));
     }
 
-    public function testRunDispatchesAllEventsWithException()
-    {
-        $application = new Application();
-        $application->setDispatcher($this->getDispatcher());
-        $application->setAutoExit(false);
 
-        $application->register('foo')->setCode(function (InputInterface $input, OutputInterface $output) {
-            $output->write('foo.');
 
-            throw new \RuntimeException('foo');
-        });
-
-        $tester = new ApplicationTester($application);
-        $tester->run(array('command' => 'foo'));
-        $this->assertContains('before.foo.after.caught.', $tester->getDisplay());
-    }
-
-    public function testRunWithDispatcherSkippingCommand()
-    {
-        $application = new Application();
-        $application->setDispatcher($this->getDispatcher(true));
-        $application->setAutoExit(false);
-
-        $application->register('foo')->setCode(function (InputInterface $input, OutputInterface $output) {
-            $output->write('foo.');
-        });
-
-        $tester = new ApplicationTester($application);
-        $exitCode = $tester->run(array('command' => 'foo'));
-        $this->assertContains('before.after.', $tester->getDisplay());
-        $this->assertEquals(ConsoleCommandEvent::RETURN_CODE_DISABLED, $exitCode);
-    }
 
     public function testTerminalDimensions()
     {
@@ -922,31 +890,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array($width, 80), $application->getTerminalDimensions());
     }
 
-    protected function getDispatcher($skipCommand = false)
-    {
-        $dispatcher = new EventDispatcher();
-        $dispatcher->addListener('console.command', function (ConsoleCommandEvent $event) use ($skipCommand) {
-            $event->getOutput()->write('before.');
 
-            if ($skipCommand) {
-                $event->disableCommand();
-            }
-        });
-        $dispatcher->addListener('console.terminate', function (ConsoleTerminateEvent $event) use ($skipCommand) {
-            $event->getOutput()->write('after.');
-
-            if (!$skipCommand) {
-                $event->setExitCode(113);
-            }
-        });
-        $dispatcher->addListener('console.exception', function (ConsoleExceptionEvent $event) {
-            $event->getOutput()->writeln('caught.');
-
-            $event->setException(new \LogicException('caught.', $event->getExitCode(), $event->getException()));
-        });
-
-        return $dispatcher;
-    }
 
     public function testSetRunCustomDefaultCommand()
     {

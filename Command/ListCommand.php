@@ -25,6 +25,50 @@ use Symfony\Component\Console\Input\InputDefinition;
  */
 class ListCommand extends Command
 {
+
+    /**
+     * @var InputInterface
+     */
+    private $input;
+    
+    /**
+     * @var OutputInterface
+     */
+    private $output;
+    
+    function getCallable() {
+        $callable = function () {
+            if ($this->input->getOption('xml')) {
+                $this->input->setOption('format', 'xml');
+            }
+
+            $helper = new DescriptorHelper();
+            $helper->describe($this->output, $this->getApplication(), array(
+                'format'    => $this->input->getOption('format'),
+                'raw_text'  => $this->input->getOption('raw'),
+                'namespace' => $this->input->getArgument('namespace'),
+            ));
+        };
+        
+        return $callable;
+    }
+
+    /**
+     * Return an array of parameters that should be passed to the callable.
+     * They should have the correct name indexes, the order does not matter
+     * as Auryn will inject them correctly.
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return array
+     */
+    function parseInput(InputInterface $input, OutputInterface $output) {
+        $this->input = $input;
+        $this->output = $output;
+        
+        return [];
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -63,22 +107,24 @@ EOF
         return $this->createDefinition();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        if ($input->getOption('xml')) {
-            $input->setOption('format', 'xml');
-        }
-
-        $helper = new DescriptorHelper();
-        $helper->describe($output, $this->getApplication(), array(
-            'format'    => $input->getOption('format'),
-            'raw_text'  => $input->getOption('raw'),
-            'namespace' => $input->getArgument('namespace'),
-        ));
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    protected function execute(InputInterface $input, OutputInterface $output)
+//    {
+//        $this->callable = function () use ($input)
+//        
+//        if ($input->getOption('xml')) {
+//            $input->setOption('format', 'xml');
+//        }
+//
+//        $helper = new DescriptorHelper();
+//        $helper->describe($output, $this->getApplication(), array(
+//            'format'    => $input->getOption('format'),
+//            'raw_text'  => $input->getOption('raw'),
+//            'namespace' => $input->getArgument('namespace'),
+//        ));
+//    }
 
     /**
      * {@inheritdoc}
