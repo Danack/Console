@@ -88,7 +88,8 @@ function uploadFile($filename, $dir) {
     echo "Need to upload the file $filename in the directory $dir".PHP_EOL;
 }
 
-
+//Auryn needs scalars prefixed with a colon and we only
+//have scalars here.
 function lowrey($params) {
     $newParams = [];
     foreach ($params as $key => $value) {
@@ -120,11 +121,6 @@ $console->add($callableCommand);
 
 try {
     $parsedCommand = $console->parseCommandLine();
-
-    if ($error = $parsedCommand->getError()) {
-        echo $error->getMessage();
-        exit(-1);
-    }
     
     $provider = new Auryn\Provider();
     $provider->execute(

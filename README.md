@@ -34,12 +34,6 @@ $console->add($callableCommand);
 
 try {
     $parsedCommand = $console->parseCommandLine();
-
-    if ($error = $parsedCommand->getError()) {
-        echo $error->getMessage();
-        exit(-1);
-    }
-
     $provider = new Auryn\Provider();
     $provider->execute(
         $parsedCommand->getCallable(),
@@ -58,7 +52,7 @@ function uploadFile($filename) {
     echo "Need to upload the file $filename".PHP_EOL;
 }
 
-
+//Auryn needs scalars prefixed with a colon
 function lowrey($params) {
     $newParams = [];
     foreach ($params as $key => $value) {
