@@ -6,6 +6,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TestCommand extends Command
 {
+
+    function parseInput(InputInterface $input, OutputInterface $output) {
+        return [];
+    }
+
+    function getCallable() {
+        return null;
+    }
+    
+    
     protected function configure()
     {
         $this

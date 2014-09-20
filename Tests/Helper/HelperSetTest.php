@@ -13,6 +13,7 @@ namespace Symfony\Component\Console\Tests\Helper;
 
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\GenericCommand;
 
 class HelperSetTest extends \PHPUnit_Framework_TestCase
 {
@@ -87,8 +88,8 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCommand()
     {
-        $cmd_01 = new Command('foo');
-        $cmd_02 = new Command('bar');
+        $cmd_01 = new GenericCommand('foo');
+        $cmd_02 = new GenericCommand('bar');
 
         $helperset = new HelperSet();
         $helperset->setCommand($cmd_01);
@@ -105,7 +106,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCommand()
     {
-        $cmd = new Command('foo');
+        $cmd = new GenericCommand('foo');
         $helperset = new HelperSet();
         $helperset->setCommand($cmd);
         $this->assertEquals($cmd, $helperset->getCommand(), '->getCommand() retrieves stored command');

@@ -15,6 +15,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Command\GenericCommand;
 
 class CommandTesterTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +24,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->command = new Command('foo');
+        $this->command = new GenericCommand('foo');
         $this->command->addArgument('command');
         $this->command->addArgument('foo');
         $this->command->setCode(function ($input, $output) { $output->writeln('foo'); });

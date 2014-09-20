@@ -12,6 +12,7 @@
 namespace Symfony\Component\Console\Tests\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\GenericCommand;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -35,7 +36,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $command = new Command('foo:bar');
+        $command = new GenericCommand('foo:bar');
         $this->assertEquals('foo:bar', $command->getName(), '__construct() takes the command name as its first argument');
     }
 
@@ -45,7 +46,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testCommandNameCannotBeEmpty()
     {
-        new Command();
+        new GenericCommand();
     }
 
     public function testSetApplication()
@@ -245,7 +246,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteMethodNeedsToBeOverriden()
     {
-        $command = new Command('foo');
+        $command = new GenericCommand('foo');
         $command->run(new StringInput(''), new NullOutput());
     }
 
@@ -280,38 +281,10 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(0, $command->run(new StringInput(''), new NullOutput()));
     }
+    
+    
 
-    public function testSetCode()
-    {
-        $command = new \TestCommand();
-        $ret = $command->setCode(function (InputInterface $input, OutputInterface $output) {
-            $output->writeln('from the code...');
-        });
-        $this->assertEquals($command, $ret, '->setCode() implements a fluent interface');
-        $tester = new CommandTester($command);
-        $tester->execute(array());
-        $this->assertEquals('interact called'.PHP_EOL.'from the code...'.PHP_EOL, $tester->getDisplay());
-    }
 
-    public function testSetCodeWithNonClosureCallable()
-    {
-        $command = new \TestCommand();
-        $ret = $command->setCode(array($this, 'callableMethodCommand'));
-        $this->assertEquals($command, $ret, '->setCode() implements a fluent interface');
-        $tester = new CommandTester($command);
-        $tester->execute(array());
-        $this->assertEquals('interact called'.PHP_EOL.'from the code...'.PHP_EOL, $tester->getDisplay());
-    }
-
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage Invalid callable provided to Command::setCode.
-     */
-    public function testSetCodeWithNonCallable()
-    {
-        $command = new \TestCommand();
-        $command->setCode(array($this, 'nonExistentMethod'));
-    }
 
     public function callableMethodCommand(InputInterface $input, OutputInterface $output)
     {

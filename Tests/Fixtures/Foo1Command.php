@@ -9,6 +9,14 @@ class Foo1Command extends Command
     public $input;
     public $output;
 
+    function parseInput(InputInterface $input, OutputInterface $output) {
+        return [];
+    }
+
+    function getCallable() {
+        return null;
+    }
+
     protected function configure()
     {
         $this

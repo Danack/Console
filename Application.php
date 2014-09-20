@@ -67,7 +67,6 @@ class Application
     private $autoExit = true;
     private $definition;
     private $helperSet;
-    private $dispatcher;
     private $terminalDimensions;
     private $defaultCommand;
 
@@ -116,27 +115,9 @@ class Application
         }
 
         $this->configureIO($input, $output);
+        $callableAndParams = $this->doRun($input, $output);
 
-        try {
-            $callableAndParams = $this->doRun($input, $output);
-
-            return $callableAndParams;
-        } catch (\Exception $e) {
-
-            $output = new BufferedOutput();
-            $this->renderException($e, $output);
-
-            $errorString = $output->fetch();
-
-//            if ($output instanceof ConsoleOutputInterface) {
-//                $this->renderException($e, $output->getErrorOutput());
-//            } else {
-//                $this->renderException($e, $output);
-//            }
-            
-            
-            return [$e, null, $errorString];
-        }
+        return $callableAndParams;
     }
 
     /**

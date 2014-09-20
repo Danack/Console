@@ -6,6 +6,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Foo2Command extends Command
 {
+
+    function parseInput(InputInterface $input, OutputInterface $output) {
+        return [];
+    }
+
+    function getCallable() {
+        return null;
+    }
+    
     protected function configure()
     {
         $this

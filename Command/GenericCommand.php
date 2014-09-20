@@ -27,7 +27,13 @@ class GenericCommand extends Command {
      * @return array
      */
     function parseInput(InputInterface $input, OutputInterface $output) {
-        return [];
+        $params = [];
+        foreach ($this->getDefinition()->getArguments() as $argument) {
+            $name = $argument->getName();
+            $params[$name] = $input->getArgument($name);
+        }
+
+        return $params;
     }
 }
 
