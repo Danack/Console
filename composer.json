@@ -1,11 +1,15 @@
 {
-    "name": "symfony/console",
+    "name": "danack/console",
     "type": "library",
-    "description": "Symfony Console Component",
-    "keywords": [],
+    "description": "Refactored Symfony Console Component",
+    "keywords": ["console", "cli"],
     "homepage": "http://symfony.com",
     "license": "MIT",
     "authors": [
+        {
+                "name": "Danack",
+                "email": "Danack@basereality.com"
+        },
         {
             "name": "Fabien Potencier",
             "email": "fabien@symfony.com"
@@ -28,12 +32,12 @@
     "require-dev": {
         "symfony/process": "~2.1",
         "psr/log": "~1.0",
-        "danack/auryn": "0.13.0"
+        "danack/auryn": "0.14.1",
+        "phpunit/phpunit": "4.2.6"
     },
     "autoload": {
         "psr-0": { "Symfony\\Component\\Console\\": "" }
     },
-    "target-dir": "Symfony/Component/Console",
     "extra": {
         "branch-alias": {
             "dev-master": "2.6-dev"
