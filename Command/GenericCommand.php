@@ -33,6 +33,11 @@ class GenericCommand extends Command {
             $params[$name] = $input->getArgument($name);
         }
 
+        foreach ($this->getDefinition()->getOptions() as $option) {
+            $name = $option->getName();
+            $params[$name] = $input->getOption($name);
+        }
+
         return $params;
     }
 }

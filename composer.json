@@ -3,12 +3,12 @@
     "type": "library",
     "description": "Refactored Symfony Console Component",
     "keywords": ["console", "cli"],
-    "homepage": "http://symfony.com",
+    "homepage": "http://basereality.com",
     "license": "MIT",
     "authors": [
         {
-                "name": "Danack",
-                "email": "Danack@basereality.com"
+            "name": "Danack",
+            "email": "Danack@basereality.com"
         },
         {
             "name": "Fabien Potencier",

@@ -76,6 +76,13 @@ If the example above was in the file example.php running the command `php exampl
 
 \o/
 
+If you want to see an example running please run the file Tests/example.php with some appropriate arguments e.g.:    
+
+* php Tests/example.php upload backup.zip --dir=/var/log
+* php Tests/example.php greet Danack
+* php Tests/example.php greet
+
+Will show the 'upload' and 'greet' commands being routed correctly
 
 
 Console Component
