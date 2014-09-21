@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Descriptor;
+namespace Danack\Console\Tests\Descriptor;
 
-use Symfony\Component\Console\Descriptor\JsonDescriptor;
+use Danack\Console\Descriptor\JsonDescriptor;
 
 class JsonDescriptorTest extends AbstractDescriptorTest
 {

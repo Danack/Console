@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Command;
+namespace Danack\Console\Tests\Command;
 
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\ParsedCommand;
+use Danack\Console\Tester\CommandTester;
+use Danack\Console\Application;
+use Danack\Console\Command\ParsedCommand;
 
 class ListCommandTest extends \PHPUnit_Framework_TestCase
 {

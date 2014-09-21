@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Question\ChoiceQuestion;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Formatter\OutputFormatterStyle;
+use Danack\Console\Question\Question;
+use Danack\Console\Question\ChoiceQuestion;
 
 /**
  * The QuestionHelper class provides helpers to interact with the user.

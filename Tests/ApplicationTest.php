@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests;
+namespace Danack\Console\Tests;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Tester\ApplicationTester;
+use Danack\Console\Application;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Helper\FormatterHelper;
+use Danack\Console\Input\ArgvInput;
+use Danack\Console\Input\ArrayInput;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Output\NullOutput;
+use Danack\Console\Output\Output;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Output\StreamOutput;
+use Danack\Console\Tester\ApplicationTester;
 
 
 
@@ -157,7 +157,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $p->setAccessible(true);
         $p->setValue($application, true);
         $command = $application->get('foo:bar');
-        $this->assertInstanceOf('Symfony\Component\Console\Command\HelpCommand', $command, '->get() returns the help command if --help is provided as the input');
+        $this->assertInstanceOf('Danack\Console\Command\HelpCommand', $command, '->get() returns the help command if --help is provided as the input');
     }
 
     public function testSilentHelp()
@@ -243,7 +243,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $application->add(new \FooCommand());
 
         $this->assertInstanceOf('FooCommand', $application->find('foo:bar'), '->find() returns a command if its name exists');
-        $this->assertInstanceOf('Symfony\Component\Console\Command\HelpCommand', $application->find('h'), '->find() returns a command if its name exists');
+        $this->assertInstanceOf('Danack\Console\Command\HelpCommand', $application->find('h'), '->find() returns a command if its name exists');
         $this->assertInstanceOf('FooCommand', $application->find('f:bar'), '->find() returns a command if the abbreviation for the namespace exists');
         $this->assertInstanceOf('FooCommand', $application->find('f:b'), '->find() returns a command if the abbreviation for the namespace and the command name exist');
         $this->assertInstanceOf('FooCommand', $application->find('a'), '->find() returns a command if the abbreviation exists for an alias');
@@ -436,7 +436,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testFindNamespaceDoesNotFailOnDeepSimilarNamespaces()
     {
-        $application = $this->getMock('Symfony\Component\Console\Application', array('getNamespaces'));
+        $application = $this->getMock('Danack\Console\Application', array('getNamespaces'));
         $application->expects($this->once())
             ->method('getNamespaces')
             ->will($this->returnValue(array('foo:sublong', 'bar:sub')));
@@ -465,7 +465,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testRenderException()
     {
-        $application = $this->getMock('Symfony\Component\Console\Application', array('getTerminalWidth'));
+        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
         $application->setAutoExit(false);
         $application->expects($this->any())
             ->method('getTerminalWidth')
@@ -494,7 +494,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 //        $tester->run(array('command' => 'foo3:bar'), array('decorated' => true));
 //        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception3decorated.txt', $tester->getDisplay(true), '->renderException() renders a pretty exceptions with previous exceptions');
 //
-//        $application = $this->getMock('Symfony\Component\Console\Application', array('getTerminalWidth'));
+//        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
 //        $application->setAutoExit(false);
 //        $application->expects($this->any())
 //            ->method('getTerminalWidth')
@@ -511,7 +511,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             throw new \Exception('エラーメッセージ'); 
         };
         
-        $application = $this->getMock('Symfony\Component\Console\Application', array('getTerminalWidth'));
+        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
         $application->setAutoExit(false);
         $application->expects($this->any())
             ->method('getTerminalWidth')
@@ -525,7 +525,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $tester->run(array('command' => 'foo'), array('decorated' => true));
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception_doublewidth1decorated.txt', $tester->getDisplay(true), '->renderException() renderes a pretty exceptions with previous exceptions');
 
-        $application = $this->getMock('Symfony\Component\Console\Application', array('getTerminalWidth'));
+        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
         $application->setAutoExit(false);
         $application->expects($this->any())
             ->method('getTerminalWidth')
@@ -550,8 +550,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $application->parseCommandLine();
         ob_end_clean();
 
-        $this->assertInstanceOf('Symfony\Component\Console\Input\ArgvInput', $command->input, '->run() creates an ArgvInput by default if none is given');
-        $this->assertInstanceOf('Symfony\Component\Console\Output\ConsoleOutput', $command->output, '->run() creates a ConsoleOutput by default if none is given');
+        $this->assertInstanceOf('Danack\Console\Input\ArgvInput', $command->input, '->run() creates an ArgvInput by default if none is given');
+        $this->assertInstanceOf('Danack\Console\Output\ConsoleOutput', $command->output, '->run() creates a ConsoleOutput by default if none is given');
 
         $application = new Application();
         $application->setAutoExit(false);
@@ -657,7 +657,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 //    {
 //        $exception = new \Exception('', 4);
 //
-//        $application = $this->getMock('Symfony\Component\Console\Application', array('doRun'));
+//        $application = $this->getMock('Danack\Console\Application', array('doRun'));
 //        $application->setAutoExit(false);
 //        $application->expects($this->once())
 //             ->method('doRun')
@@ -672,7 +672,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 //    {
 //        $exception = new \Exception('', 0);
 //
-//        $application = $this->getMock('Symfony\Component\Console\Application', array('doRun'));
+//        $application = $this->getMock('Danack\Console\Application', array('doRun'));
 //        $application->setAutoExit(false);
 //        $application->expects($this->once())
 //             ->method('doRun')

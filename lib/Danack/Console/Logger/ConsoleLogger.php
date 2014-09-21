@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Logger;
+namespace Danack\Console\Logger;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Output\ConsoleOutputInterface;
 
 /**
  * PSR-3 compliant console logger

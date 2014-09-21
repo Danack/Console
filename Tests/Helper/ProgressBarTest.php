@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Output\StreamOutput;
+use Danack\Console\Helper\ProgressBar;
+use Danack\Console\Helper\Helper;
+use Danack\Console\Output\StreamOutput;
 
 class ProgressBarTest extends \PHPUnit_Framework_TestCase
 {
@@ -246,7 +246,7 @@ class ProgressBarTest extends \PHPUnit_Framework_TestCase
 
     public function testRedrawFrequency()
     {
-        $bar = $this->getMock('Symfony\Component\Console\Helper\ProgressBar', array('display'), array($output = $this->getOutputStream(), 6));
+        $bar = $this->getMock('Danack\Console\Helper\ProgressBar', array('display'), array($output = $this->getOutputStream(), 6));
         $bar->expects($this->exactly(4))->method('display');
 
         $bar->setRedrawFrequency(2);

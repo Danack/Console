@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Input;
+namespace Danack\Console\Input;
 
 /**
  * InputAwareInterface should be implemented by classes that depends on the

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
 /**
  * HelperInterface is the interface all helpers must implement.

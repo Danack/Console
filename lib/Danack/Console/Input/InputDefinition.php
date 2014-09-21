@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Input;
+namespace Danack\Console\Input;
 
 if (!defined('JSON_UNESCAPED_UNICODE')) {
     define('JSON_UNESCAPED_SLASHES', 64);
     define('JSON_UNESCAPED_UNICODE', 256);
 }
 
-use Symfony\Component\Console\Descriptor\TextDescriptor;
-use Symfony\Component\Console\Descriptor\XmlDescriptor;
-use Symfony\Component\Console\Output\BufferedOutput;
+use Danack\Console\Descriptor\TextDescriptor;
+use Danack\Console\Descriptor\XmlDescriptor;
+use Danack\Console\Output\BufferedOutput;
 
 /**
  * A InputDefinition represents a set of valid command line arguments and options.

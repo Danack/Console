@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Descriptor;
+namespace Danack\Console\Descriptor;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\AbstractCommand;
+use Danack\Console\Application;
+use Danack\Console\Command\AbstractCommand;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>

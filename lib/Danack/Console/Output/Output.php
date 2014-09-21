@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Output;
+namespace Danack\Console\Output;
 
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use Symfony\Component\Console\Formatter\OutputFormatter;
+use Danack\Console\Formatter\OutputFormatterInterface;
+use Danack\Console\Formatter\OutputFormatter;
 
 /**
  * Base class for output classes.

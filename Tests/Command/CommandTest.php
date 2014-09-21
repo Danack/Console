@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Command;
+namespace Danack\Console\Tests\Command;
 
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Tester\CommandTester;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Command\Command;
+use Danack\Console\Helper\FormatterHelper;
+use Danack\Console\Application;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Input\StringInput;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Output\NullOutput;
+use Danack\Console\Tester\CommandTester;
 
 class CommandTest extends \PHPUnit_Framework_TestCase
 {

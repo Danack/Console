@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Formatter;
+namespace Danack\Console\Tests\Formatter;
 
-use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Danack\Console\Formatter\OutputFormatter;
+use Danack\Console\Formatter\OutputFormatterStyle;
 
 class OutputFormatterTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class OutputFormatterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             "\033[33mSymfony\\Component\\Console does work very well!\033[39m",
-            $formatter->format('<comment>Symfony\Component\Console does work very well!</comment>')
+            $formatter->format('<comment>Danack\Console does work very well!</comment>')
         );
     }
 

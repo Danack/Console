@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\ProgressHelper;
-use Symfony\Component\Console\Output\StreamOutput;
+use Danack\Console\Helper\ProgressHelper;
+use Danack\Console\Output\StreamOutput;
 
 class ProgressHelperTest extends \PHPUnit_Framework_TestCase
 {
@@ -138,7 +138,7 @@ class ProgressHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testRedrawFrequency()
     {
-        $progress = $this->getMock('Symfony\Component\Console\Helper\ProgressHelper', array('display'));
+        $progress = $this->getMock('Danack\Console\Helper\ProgressHelper', array('display'));
         $progress->expects($this->exactly(4))
                  ->method('display');
 

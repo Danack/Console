@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Input;
+namespace Danack\Console\Tests\Input;
 
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\StringInput;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Input\StringInput;
 
 class StringInputTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class StringInputTest extends \PHPUnit_Framework_TestCase
     public function testTokenize($input, $tokens, $message)
     {
         $input = new StringInput($input);
-        $r = new \ReflectionClass('Symfony\Component\Console\Input\ArgvInput');
+        $r = new \ReflectionClass('Danack\Console\Input\ArgvInput');
         $p = $r->getProperty('tokens');
         $p->setAccessible(true);
         $this->assertEquals($tokens, $p->getValue($input), $message);

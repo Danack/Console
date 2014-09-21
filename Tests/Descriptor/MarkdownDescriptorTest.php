@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Descriptor;
+namespace Danack\Console\Tests\Descriptor;
 
-use Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use Danack\Console\Descriptor\MarkdownDescriptor;
 
 class MarkdownDescriptorTest extends AbstractDescriptorTest
 {

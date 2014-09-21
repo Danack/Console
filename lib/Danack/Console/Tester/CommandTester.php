@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tester;
+namespace Danack\Console\Tester;
 
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Input\ArrayInput;
+use Danack\Console\Output\StreamOutput;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
 
 /**
  * Eases the testing of console commands.

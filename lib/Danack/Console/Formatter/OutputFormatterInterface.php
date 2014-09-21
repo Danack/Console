@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Formatter;
+namespace Danack\Console\Formatter;
 
 /**
  * Formatter interface for console output.

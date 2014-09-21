@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Descriptor;
+namespace Danack\Console\Descriptor;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Output\OutputInterface;
 
 /**
  * Descriptor interface.

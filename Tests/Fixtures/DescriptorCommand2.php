@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Fixtures;
+namespace Danack\Console\Tests\Fixtures;
 
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
 
 class DescriptorCommand2 extends AbstractCommand
 {

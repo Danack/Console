@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Input;
+namespace Danack\Console\Tests\Input;
 
-use Symfony\Component\Console\Input\InputArgument;
+use Danack\Console\Input\InputArgument;
 
 class InputArgumentTest extends \PHPUnit_Framework_TestCase
 {

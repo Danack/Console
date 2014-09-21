@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Output\OutputInterface;
 
 /**
  * Provides helpers to display a table.

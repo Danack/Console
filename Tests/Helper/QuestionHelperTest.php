@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
+use Danack\Console\Helper\QuestionHelper;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Helper\FormatterHelper;
+use Danack\Console\Output\StreamOutput;
+use Danack\Console\Question\ChoiceQuestion;
+use Danack\Console\Question\ConfirmationQuestion;
+use Danack\Console\Question\Question;
 
 class QuestionHelperTest extends \PHPUnit_Framework_TestCase
 {
@@ -221,7 +221,7 @@ class QuestionHelperTest extends \PHPUnit_Framework_TestCase
 
     protected function createInputInterfaceMock($interactive = true)
     {
-        $mock = $this->getMock('Symfony\Component\Console\Input\InputInterface');
+        $mock = $this->getMock('Danack\Console\Input\InputInterface');
         $mock->expects($this->any())
             ->method('isInteractive')
             ->will($this->returnValue($interactive));

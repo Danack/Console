@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Descriptor;
+namespace Danack\Console\Tests\Descriptor;
 
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Tests\Fixtures\DescriptorApplication1;
-use Symfony\Component\Console\Tests\Fixtures\DescriptorApplication2;
-use Symfony\Component\Console\Tests\Fixtures\DescriptorCommand1;
-use Symfony\Component\Console\Tests\Fixtures\DescriptorCommand2;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Tests\Fixtures\DescriptorApplication1;
+use Danack\Console\Tests\Fixtures\DescriptorApplication2;
+use Danack\Console\Tests\Fixtures\DescriptorCommand1;
+use Danack\Console\Tests\Fixtures\DescriptorCommand2;
 
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>

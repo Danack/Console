@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use Danack\Console\Formatter\OutputFormatterInterface;
 
 /**
  * Helper is the base class for all helper classes.

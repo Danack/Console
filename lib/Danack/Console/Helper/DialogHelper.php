@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Formatter\OutputFormatterStyle;
 
 /**
  * The Dialog class provides helpers to interact with the user.

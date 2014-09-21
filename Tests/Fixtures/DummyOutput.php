@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Fixtures;
+namespace Danack\Console\Tests\Fixtures;
 
-use Symfony\Component\Console\Output\BufferedOutput;
+use Danack\Console\Output\BufferedOutput;
 
 /**
  * Dummy output

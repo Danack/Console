@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\DebugFormatterHelper;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\Helper;
-use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Helper\ProcessHelper;
+use Danack\Console\Helper\DebugFormatterHelper;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Helper\Helper;
+use Danack\Console\Output\StreamOutput;
+use Danack\Console\Helper\ProcessHelper;
 use Symfony\Component\Process\Process;
 
 class ProcessHelperTest extends \PHPUnit_Framework_TestCase

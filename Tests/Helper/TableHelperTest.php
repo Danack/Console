@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\TableHelper;
-use Symfony\Component\Console\Output\StreamOutput;
+use Danack\Console\Helper\TableHelper;
+use Danack\Console\Output\StreamOutput;
 
 class TableHelperTest extends \PHPUnit_Framework_TestCase
 {

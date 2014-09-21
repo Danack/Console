@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Fixtures;
+namespace Danack\Console\Tests\Fixtures;
 
-use Symfony\Component\Console\Application;
+use Danack\Console\Application;
 
 class DescriptorApplication2 extends Application
 {

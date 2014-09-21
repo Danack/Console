@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Helper\DialogHelper;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Output\StreamOutput;
+use Danack\Console\Input\ArrayInput;
+use Danack\Console\Helper\DialogHelper;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Helper\FormatterHelper;
+use Danack\Console\Output\StreamOutput;
 
 class DialogHelperTest extends \PHPUnit_Framework_TestCase
 {

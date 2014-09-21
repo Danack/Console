@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Tester;
+namespace Danack\Console\Tests\Tester;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Tester\ApplicationTester;
+use Danack\Console\Application;
+use Danack\Console\Output\Output;
+use Danack\Console\Tester\ApplicationTester;
 
 class ApplicationTesterTest extends \PHPUnit_Framework_TestCase
 {

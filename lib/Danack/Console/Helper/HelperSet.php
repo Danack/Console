@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Command\AbstractCommand;
+use Danack\Console\Command\AbstractCommand;
 
 /**
  * HelperSet represents a set of helpers to be used with a command.

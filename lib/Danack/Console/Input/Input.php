@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Input;
+namespace Danack\Console\Input;
 
 /**
  * Input is the base class for all concrete Input classes.

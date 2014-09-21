@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Symfony\Component\Console\Command;
+namespace Danack\Console\Command;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
 
 
 interface Dispatchable {

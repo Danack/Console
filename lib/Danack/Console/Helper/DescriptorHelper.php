@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Descriptor\DescriptorInterface;
-use Symfony\Component\Console\Descriptor\JsonDescriptor;
-use Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use Symfony\Component\Console\Descriptor\TextDescriptor;
-use Symfony\Component\Console\Descriptor\XmlDescriptor;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Descriptor\DescriptorInterface;
+use Danack\Console\Descriptor\JsonDescriptor;
+use Danack\Console\Descriptor\MarkdownDescriptor;
+use Danack\Console\Descriptor\TextDescriptor;
+use Danack\Console\Descriptor\XmlDescriptor;
+use Danack\Console\Output\OutputInterface;
 
 /**
  * This class adds helper method to describe objects in various formats.

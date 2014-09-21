@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Tester;
+namespace Danack\Console\Tests\Tester;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Command\Command;
+use Danack\Console\Application;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Output\Output;
+use Danack\Console\Tester\CommandTester;
+use Danack\Console\Command\Command;
 
 class CommandTesterTest extends \PHPUnit_Framework_TestCase
 {

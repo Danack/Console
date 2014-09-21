@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Logger;
+namespace Danack\Console\Tests\Logger;
 
 use Psr\Log\Test\LoggerInterfaceTest;
 use Psr\Log\LogLevel;
-use Symfony\Component\Console\Logger\ConsoleLogger;
-use Symfony\Component\Console\Tests\Fixtures\DummyOutput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Logger\ConsoleLogger;
+use Danack\Console\Tests\Fixtures\DummyOutput;
+use Danack\Console\Output\OutputInterface;
 
 /**
  * Console logger test

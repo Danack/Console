@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Input;
+namespace Danack\Console\Tests\Input;
 
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputOption;
 
 class InputDefinitionTest extends \PHPUnit_Framework_TestCase
 {

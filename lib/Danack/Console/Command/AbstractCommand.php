@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Command;
+namespace Danack\Console\Command;
 
-use Symfony\Component\Console\Descriptor\TextDescriptor;
-use Symfony\Component\Console\Descriptor\XmlDescriptor;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Command\Dispatchable;
-use Symfony\Component\Console\Command\ParsedCommand;
+use Danack\Console\Descriptor\TextDescriptor;
+use Danack\Console\Descriptor\XmlDescriptor;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputOption;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\BufferedOutput;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Application;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Command\Dispatchable;
+use Danack\Console\Command\ParsedCommand;
 
 
 /**

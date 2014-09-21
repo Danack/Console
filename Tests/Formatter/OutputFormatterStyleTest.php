@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Formatter;
+namespace Danack\Console\Tests\Formatter;
 
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Danack\Console\Formatter\OutputFormatterStyle;
 
 class OutputFormatterStyleTest extends \PHPUnit_Framework_TestCase
 {

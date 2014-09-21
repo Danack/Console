@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputAwareInterface;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Input\InputAwareInterface;
 
 /**
  * An implementation of InputAwareInterface for Helpers.

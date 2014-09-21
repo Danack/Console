@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Helper;
+namespace Danack\Console\Helper;
 
-use Symfony\Component\Console\Formatter\OutputFormatter;
+use Danack\Console\Formatter\OutputFormatter;
 
 /**
  * The Formatter class provides helpers to format messages.

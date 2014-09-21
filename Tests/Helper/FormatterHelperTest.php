@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\FormatterHelper;
+use Danack\Console\Helper\FormatterHelper;
 
 class FormatterHelperTest extends \PHPUnit_Framework_TestCase
 {

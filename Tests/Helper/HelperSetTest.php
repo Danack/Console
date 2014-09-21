@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Helper;
+namespace Danack\Console\Tests\Helper;
 
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Command\Command;
+use Danack\Console\Helper\HelperSet;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Command\Command;
 
 class HelperSetTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::__construct
+     * @covers \Danack\Console\Helper\HelperSet::__construct
      */
     public function testConstructor()
     {
@@ -30,7 +30,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::set
+     * @covers \Danack\Console\Helper\HelperSet::set
      */
     public function testSet()
     {
@@ -51,7 +51,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::has
+     * @covers \Danack\Console\Helper\HelperSet::has
      */
     public function testHas()
     {
@@ -61,7 +61,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::get
+     * @covers \Danack\Console\Helper\HelperSet::get
      */
     public function testGet()
     {
@@ -84,7 +84,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::setCommand
+     * @covers \Danack\Console\Helper\HelperSet::setCommand
      */
     public function testSetCommand()
     {
@@ -103,7 +103,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::getCommand
+     * @covers \Danack\Console\Helper\HelperSet::getCommand
      */
     public function testGetCommand()
     {
@@ -115,7 +115,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Symfony\Component\Console\Helper\HelperSet::getIterator
+     * @covers \Danack\Console\Helper\HelperSet::getIterator
      */
     public function testIteration()
     {
@@ -140,7 +140,7 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
      */
     private function getGenericMockHelper($name, HelperSet $helperset = null)
     {
-        $mock_helper = $this->getMock('\Symfony\Component\Console\Helper\HelperInterface');
+        $mock_helper = $this->getMock('\Danack\Console\Helper\HelperInterface');
         $mock_helper->expects($this->any())
             ->method('getName')
             ->will($this->returnValue($name));

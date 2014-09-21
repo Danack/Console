@@ -1,8 +1,8 @@
 <?php
 
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
 
 
 

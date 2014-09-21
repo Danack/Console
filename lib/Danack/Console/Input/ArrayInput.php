@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Input;
+namespace Danack\Console\Input;
 
 /**
  * ArrayInput represents an input provided as an array.

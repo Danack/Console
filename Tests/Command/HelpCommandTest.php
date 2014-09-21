@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Command;
+namespace Danack\Console\Tests\Command;
 
-use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Command\HelpCommand;
-use Symfony\Component\Console\Command\ListCommand;
-use Symfony\Component\Console\Application;
+use Danack\Console\Tester\CommandTester;
+use Danack\Console\Command\HelpCommand;
+use Danack\Console\Command\ListCommand;
+use Danack\Console\Application;
 
 class HelpCommandTest extends \PHPUnit_Framework_TestCase
 {

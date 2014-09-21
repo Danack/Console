@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Descriptor;
+namespace Danack\Console\Descriptor;
 
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
+use Danack\Console\Application;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Input\InputDefinition;
+use Danack\Console\Input\InputOption;
 
 /**
  * XML descriptor.

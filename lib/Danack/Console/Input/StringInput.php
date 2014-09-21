@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Input;
+namespace Danack\Console\Input;
 
 /**
  * StringInput represents an input provided as a string.

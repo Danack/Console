@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Output;
+namespace Danack\Console\Output;
 
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>

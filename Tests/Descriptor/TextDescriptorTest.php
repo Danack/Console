@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Descriptor;
+namespace Danack\Console\Tests\Descriptor;
 
-use Symfony\Component\Console\Descriptor\TextDescriptor;
+use Danack\Console\Descriptor\TextDescriptor;
 
 class TextDescriptorTest extends AbstractDescriptorTest
 {

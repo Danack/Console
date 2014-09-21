@@ -36,8 +36,12 @@
         "phpunit/phpunit": "4.2.6"
     },
     "autoload": {
-        "psr-0": { "Symfony\\Component\\Console\\": "" }
+        "psr-0": { "Danack\\Console\\": "lib/" }
     },
+    "autoload-dev": {
+        "psr-4": { "Danack\\Console\\Tests\\": "Tests/" }
+    },
+    
     "extra": {
         "branch-alias": {
             "dev-master": "2.6-dev"

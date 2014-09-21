@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Output;
+namespace Danack\Console\Tests\Output;
 
-use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Danack\Console\Output\NullOutput;
+use Danack\Console\Output\OutputInterface;
 
 class NullOutputTest extends \PHPUnit_Framework_TestCase
 {

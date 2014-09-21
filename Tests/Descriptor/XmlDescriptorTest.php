@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Console\Tests\Descriptor;
+namespace Danack\Console\Tests\Descriptor;
 
-use Symfony\Component\Console\Descriptor\XmlDescriptor;
+use Danack\Console\Descriptor\XmlDescriptor;
 
 class XmlDescriptorTest extends AbstractDescriptorTest
 {
