@@ -23,7 +23,7 @@ use Symfony\Component\Console\Input\InputDefinition;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ListCommand extends Command
+class ListCommand extends AbstractCommand
 {
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class FooCommand extends Command
+class FooCommand extends AbstractCommand
 {
     public $input;
     public $output;

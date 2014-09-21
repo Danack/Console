@@ -12,7 +12,7 @@
 namespace Symfony\Component\Console\Descriptor;
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -111,7 +111,7 @@ class TextDescriptor extends Descriptor
     /**
      * {@inheritdoc}
      */
-    protected function describeCommand(Command $command, array $options = array())
+    protected function describeCommand(AbstractCommand $command, array $options = array())
     {
         $command->getSynopsis();
         $command->mergeApplicationDefinition(false);
@@ -213,7 +213,7 @@ class TextDescriptor extends Descriptor
     }
 
     /**
-     * @param Command[] $commands
+     * @param AbstractCommand[] $commands
      *
      * @return int
      */

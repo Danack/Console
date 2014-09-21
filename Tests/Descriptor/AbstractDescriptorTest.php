@@ -12,7 +12,7 @@
 namespace Symfony\Component\Console\Tests\Descriptor;
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,7 +39,7 @@ abstract class AbstractDescriptorTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @dataProvider getDescribeCommandTestData */
-    public function testDescribeCommand(Command $command, $expectedDescription)
+    public function testDescribeCommand(AbstractCommand $command, $expectedDescription)
     {
         $this->assertDescription($expectedDescription, $command);
     }

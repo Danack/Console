@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Command\HelpCommand;
 use Symfony\Component\Console\Command\ListCommand;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -35,7 +35,7 @@ use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Console\Helper\TableHelper;
-use Symfony\Component\Console\Command\GenericCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\ParsedCommand;
 
 
@@ -321,19 +321,19 @@ class Application
      *
      * @param string $name The command name
      *
-     * @return Command The newly created command
+     * @return AbstractCommand The newly created command
      *
      * @api
      */
     public function register($name, $callable)
     {
-        return $this->add(new GenericCommand($name, $callable));
+        return $this->add(new Command($name, $callable));
     }
 
     /**
      * Adds an array of command objects.
      *
-     * @param Command[] $commands An array of commands
+     * @param AbstractCommand[] $commands An array of commands
      *
      * @api
      */
@@ -349,13 +349,13 @@ class Application
      *
      * If a command with the same name already exists, it will be overridden.
      *
-     * @param Command $command A Command object
+     * @param AbstractCommand $command A Command object
      *
-     * @return Command The registered command
+     * @return AbstractCommand The registered command
      *
      * @api
      */
-    public function add(Command $command)
+    public function add(AbstractCommand $command)
     {
         $command->setApplication($this);
 
@@ -383,7 +383,7 @@ class Application
      *
      * @param string $name The command name or alias
      *
-     * @return Command A Command object
+     * @return AbstractCommand A Command object
      *
      * @throws \InvalidArgumentException When command name given does not exist
      *
@@ -491,7 +491,7 @@ class Application
      *
      * @param string $name A command name or a command alias
      *
-     * @return Command A Command instance
+     * @return AbstractCommand A Command instance
      *
      * @throws \InvalidArgumentException When command name is incorrect or ambiguous
      *
@@ -550,7 +550,7 @@ class Application
      *
      * @param string $namespace A namespace name
      *
-     * @return Command[] An array of Command instances
+     * @return AbstractCommand[] An array of Command instances
      *
      * @api
      */
@@ -823,13 +823,13 @@ class Application
     }
 
     /**
-     * @param Command $command
+     * @param AbstractCommand $command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return array An array of [$callable, $parameters] that should be called for the command
      * @throws \Exception
      */
-    protected function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
+    protected function doRunCommand(AbstractCommand $command, InputInterface $input, OutputInterface $output)
     {
         foreach ($command->getHelperSet() as $helper) {
             if ($helper instanceof InputAwareInterface) {
@@ -875,7 +875,7 @@ class Application
     /**
      * Gets the default commands that should always be available.
      *
-     * @return Command[] An array of default Command instances
+     * @return AbstractCommand[] An array of default Command instances
      */
     protected function getDefaultCommands()
     {

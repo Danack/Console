@@ -11,12 +11,12 @@
 
 namespace Symfony\Component\Console\Tests\Fixtures;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class DescriptorCommand1 extends Command
+class DescriptorCommand1 extends AbstractCommand
 {
 
     function parseInput(InputInterface $input, OutputInterface $output) {

@@ -12,7 +12,7 @@
 namespace Symfony\Component\Console\Descriptor;
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
@@ -37,12 +37,12 @@ class ApplicationDescription
     private $namespaces;
 
     /**
-     * @var Command[]
+     * @var AbstractCommand[]
      */
     private $commands;
 
     /**
-     * @var Command[]
+     * @var AbstractCommand[]
      */
     private $aliases;
 
@@ -71,7 +71,7 @@ class ApplicationDescription
     }
 
     /**
-     * @return Command[]
+     * @return AbstractCommand[]
      */
     public function getCommands()
     {
@@ -85,7 +85,7 @@ class ApplicationDescription
     /**
      * @param string $name
      *
-     * @return Command
+     * @return AbstractCommand
      *
      * @throws \InvalidArgumentException
      */
@@ -107,7 +107,7 @@ class ApplicationDescription
         foreach ($this->sortCommands($all) as $namespace => $commands) {
             $names = array();
 
-            /** @var Command $command */
+            /** @var AbstractCommand $command */
             foreach ($commands as $name => $command) {
                 if (!$command->getName()) {
                     continue;

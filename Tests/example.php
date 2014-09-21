@@ -35,8 +35,8 @@
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Command\GenericCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -48,7 +48,7 @@ require_once __DIR__."/../vendor/autoload.php";
  * Class AboutCommand - An example command. Although you can write full Command objects
  * most of the time the GenericCommand object will be sufficient.
  */
-class AboutCommand extends Command
+class AboutCommand extends AbstractCommand
 {
     function __construct() {
         parent::__construct('about');
@@ -109,7 +109,7 @@ function lowrey($params) {
 $console = new Application();
 $console->add(new AboutCommand());
 
-$uploadCommand = new GenericCommand('upload', 'uploadFile');
+$uploadCommand = new Command('upload', 'uploadFile');
 $uploadCommand->addArgument('filename', InputArgument::REQUIRED, 'The name of the file to upload');
 $uploadCommand->addOption('dir', null, InputArgument::OPTIONAL, 'Which directory to upload from', './');
 
@@ -120,7 +120,7 @@ $helloWorldCallable = function ($name) {
     echo "Hello world, and particularly $name".PHP_EOL;
 };
 
-$callableCommand = new GenericCommand('greet', $helloWorldCallable);
+$callableCommand = new Command('greet', $helloWorldCallable);
 $callableCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the person to say hello to.');
 $callableCommand->setDescription("Says hello to the world and one named person");
 $console->add($callableCommand);

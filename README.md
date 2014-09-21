@@ -18,7 +18,7 @@ $console = new Application();
 $console->add(new AboutCommand());
 
 //Create a command that will call the function 'uploadFile'
-$uploadCommand = new GenericCommand('uploadFile', 'upload');
+$uploadCommand = new Command('uploadFile', 'upload');
 $uploadCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the thing to foo');
 $console->add($uploadCommand);
 
@@ -28,7 +28,7 @@ $helloWorldCallable = function ($name) {
 };
 
 //Create a command that will call the closure
-$callableCommand = new GenericCommand($helloWorldCallable, 'greet');
+$callableCommand = new Command($helloWorldCallable, 'greet');
 $callableCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the person to say hello to.');
 $console->add($callableCommand);
 

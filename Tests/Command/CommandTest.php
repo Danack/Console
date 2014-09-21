@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Console\Tests\Command;
 
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Command\GenericCommand;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -37,7 +37,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $callable = function() {};
-        $command = new GenericCommand('foo:bar', $callable);
+        $command = new Command('foo:bar', $callable);
         $this->assertEquals('foo:bar', $command->getName(), '__construct() takes the command name as its first argument');
     }
 

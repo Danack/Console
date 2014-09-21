@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HelpCommand extends Command
+class HelpCommand extends AbstractCommand
 {
     private $command;
     /**
@@ -107,9 +107,9 @@ EOF
     /**
      * Sets the command - really, setCommand sets the command.....Why does it set the command?
      *
-     * @param Command $command The command to set
+     * @param AbstractCommand $command The command to set
      */
-    public function setCommand(Command $command)
+    public function setCommand(AbstractCommand $command)
     {
         $this->command = $command;
     }

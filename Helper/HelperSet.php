@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Console\Helper;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 
 /**
  * HelperSet represents a set of helpers to be used with a command.
@@ -84,9 +84,9 @@ class HelperSet implements \IteratorAggregate
     /**
      * Sets the command associated with this helper set.
      *
-     * @param Command $command A Command instance
+     * @param AbstractCommand $command A Command instance
      */
-    public function setCommand(Command $command = null)
+    public function setCommand(AbstractCommand $command = null)
     {
         $this->command = $command;
     }
@@ -94,7 +94,7 @@ class HelperSet implements \IteratorAggregate
     /**
      * Gets the command associated with this helper set.
      *
-     * @return Command A Command instance
+     * @return AbstractCommand A Command instance
      */
     public function getCommand()
     {

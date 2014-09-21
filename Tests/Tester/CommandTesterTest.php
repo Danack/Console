@@ -12,10 +12,10 @@
 namespace Symfony\Component\Console\Tests\Tester;
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\AbstractCommand;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Console\Command\GenericCommand;
+use Symfony\Component\Console\Command\Command;
 
 class CommandTesterTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +25,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $callable = function ($input, $output) { $output->writeln('foo'); };
-        $this->command = new GenericCommand('foo', $callable);
+        $this->command = new Command('foo', $callable);
         $this->command->addArgument('command');
         $this->command->addArgument('foo');
 
@@ -68,7 +68,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
         $application = new Application();
         $application->setAutoExit(false);
         $callable = function ($input, $output) { $output->writeln('foo'); };
-        $command = new GenericCommand('foo', $callable);
+        $command = new Command('foo', $callable);
         
         $application->add($command);
 
