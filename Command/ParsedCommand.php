@@ -10,11 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ParsedCommand {
 
     /**
-     * @var \Exception
-     */
-    private $error;
-
-    /**
      * @var callable
      */
     private $callable;
@@ -33,9 +28,8 @@ class ParsedCommand {
      */
     private $output;
 
-    function __construct(callable $callable = null, array $params = null, InputInterface $input, OutputInterface $output, \Exception $error = null) {
+    function __construct(callable $callable = null, array $params = null, InputInterface $input, OutputInterface $output) {
         $this->callable = $callable;
-        $this->error = $error;
         $this->input = $input;
         $this->output = $output;
         $this->params = $params;
@@ -47,14 +41,7 @@ class ParsedCommand {
     public function getCallable() {
         return $this->callable;
     }
-
-    /**
-     * @return \Exception
-     */
-    public function getError() {
-        return $this->error;
-    }
-
+    
     /**
      * @return InputInterface
      */

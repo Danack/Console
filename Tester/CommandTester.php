@@ -27,6 +27,7 @@ class CommandTester
     private $command;
     private $input;
     private $output;
+    //@TODO - delete status code, this library does not run code 
     private $statusCode;
 
     /**
@@ -77,7 +78,7 @@ class CommandTester
             $this->output->setVerbosity($options['verbosity']);
         }
 
-        return $this->statusCode = $this->command->run($this->input, $this->output);
+        return $this->command->run($this->input, $this->output);
     }
 
     /**

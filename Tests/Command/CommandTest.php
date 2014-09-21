@@ -36,18 +36,11 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $command = new GenericCommand('foo:bar');
+        $callable = function() {};
+        $command = new GenericCommand('foo:bar', $callable);
         $this->assertEquals('foo:bar', $command->getName(), '__construct() takes the command name as its first argument');
     }
 
-    /**
-     * @expectedException        \LogicException
-     * @expectedExceptionMessage The command name cannot be empty.
-     */
-    public function testCommandNameCannotBeEmpty()
-    {
-        new GenericCommand();
-    }
 
     public function testSetApplication()
     {
@@ -228,27 +221,9 @@ class CommandTest extends \PHPUnit_Framework_TestCase
 
         $tester->execute(array(), array('interactive' => true));
 
-        $this->assertEquals('interact called'.PHP_EOL.'execute called'.PHP_EOL, $tester->getDisplay(), '->run() calls the interact() method if the input is interactive');
+        $this->assertEquals('interact called'.PHP_EOL, $tester->getDisplay(), '->run() calls the interact() method if the input is interactive');
     }
 
-    public function testRunNonInteractive()
-    {
-        $tester = new CommandTester(new \TestCommand());
-
-        $tester->execute(array(), array('interactive' => false));
-
-        $this->assertEquals('execute called'.PHP_EOL, $tester->getDisplay(), '->run() does not call the interact() method if the input is not interactive');
-    }
-
-    /**
-     * @expectedException        \LogicException
-     * @expectedExceptionMessage You must override the execute() method in the concrete command class.
-     */
-    public function testExecuteMethodNeedsToBeOverriden()
-    {
-        $command = new GenericCommand('foo');
-        $command->run(new StringInput(''), new NullOutput());
-    }
 
     /**
      * @expectedException        \InvalidArgumentException
@@ -260,30 +235,6 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $tester = new CommandTester($command);
         $tester->execute(array('--bar' => true));
     }
-
-    public function testRunReturnsIntegerExitCode()
-    {
-        $command = new \TestCommand();
-        $exitCode = $command->run(new StringInput(''), new NullOutput());
-        $this->assertSame(0, $exitCode, '->run() returns integer exit code (treats null as 0)');
-
-        $command = $this->getMock('TestCommand', array('execute'));
-        $command->expects($this->once())
-             ->method('execute')
-             ->will($this->returnValue('2.3'));
-        $exitCode = $command->run(new StringInput(''), new NullOutput());
-        $this->assertSame(2, $exitCode, '->run() returns integer exit code (casts numeric to int)');
-    }
-
-    public function testRunReturnsAlwaysInteger()
-    {
-        $command = new \TestCommand();
-
-        $this->assertSame(0, $command->run(new StringInput(''), new NullOutput()));
-    }
-    
-    
-
 
 
     public function callableMethodCommand(InputInterface $input, OutputInterface $output)

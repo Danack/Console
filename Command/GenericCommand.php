@@ -9,7 +9,7 @@ class GenericCommand extends Command {
 
     private $callable;
 
-    function __construct($callable, $name = null) {
+    function __construct($name, $callable) {
         parent::__construct($name);
         $this->callable = $callable;
     }

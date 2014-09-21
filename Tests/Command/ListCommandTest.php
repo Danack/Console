@@ -13,6 +13,7 @@ namespace Symfony\Component\Console\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\ParsedCommand;
 
 class ListCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,8 +21,12 @@ class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $commandTester = new CommandTester($command = $application->get('list'));
-        $commandTester->execute(array('command' => $command->getName()), array('decorated' => false));
+        $parsedCommand = $commandTester->execute(array('command' => $command->getName()), array('decorated' => false));
 
+        /** @var $parsedCommand ParsedCommand */
+        $injector = new \Auryn\Provider;
+        $injector->execute($parsedCommand->getCallable());
+        
         $this->assertRegExp('/help   Displays help for a command/', $commandTester->getDisplay(), '->execute() returns a list of available commands');
     }
 
@@ -54,7 +59,16 @@ EOF;
         $application = new Application();
         $application->add(new \FooCommand());
         $commandTester = new CommandTester($command = $application->get('list'));
-        $commandTester->execute(array('command' => $command->getName(), 'namespace' => 'foo', '--raw' => true));
+        $parsedCommand = $commandTester->execute(
+            array('command' => $command->getName(),
+                'namespace' => 'foo', '--raw' => true)
+        );
+
+        /** @var $parsedCommand ParsedCommand */
+        $injector = new \Auryn\Provider;
+        $injector->execute($parsedCommand->getCallable());
+        
+        
         $output = <<<EOF
 foo:bar   The foo:bar command
 

@@ -46,7 +46,8 @@ class ApplicationTester
 
     /**
      * Executes the application.
-     *
+     * @Todo - rename this, as it no longer runs the application
+     * @TODO - Delete this, code should call parseCommandLine directly?
      * Available options:
      *
      *  * interactive: Sets the input interactive flag

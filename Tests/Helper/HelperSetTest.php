@@ -88,8 +88,9 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCommand()
     {
-        $cmd_01 = new GenericCommand('foo');
-        $cmd_02 = new GenericCommand('bar');
+        $callable = function() {};
+        $cmd_01 = new GenericCommand('foo', $callable);
+        $cmd_02 = new GenericCommand('bar', $callable);
 
         $helperset = new HelperSet();
         $helperset->setCommand($cmd_01);
@@ -106,7 +107,8 @@ class HelperSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCommand()
     {
-        $cmd = new GenericCommand('foo');
+        $callable = function() {};
+        $cmd = new GenericCommand('foo', $callable);
         $helperset = new HelperSet();
         $helperset->setCommand($cmd);
         $this->assertEquals($cmd, $helperset->getCommand(), '->getCommand() retrieves stored command');

@@ -24,10 +24,9 @@ class ApplicationTesterTest extends \PHPUnit_Framework_TestCase
     {
         $this->application = new Application();
         $this->application->setAutoExit(false);
-        $this->application->register('foo')
-            ->addArgument('foo')
-            ->setCode(function ($input, $output) { $output->writeln('foo'); })
-        ;
+        $callable = function ($input, $output) { $output->writeln('foo'); };
+        $this->application->register('foo', $callable)
+            ->addArgument('foo');
 
         $this->tester = new ApplicationTester($this->application);
         $this->tester->run(array('command' => 'foo', 'foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
@@ -60,10 +59,5 @@ class ApplicationTesterTest extends \PHPUnit_Framework_TestCase
     public function testGetDisplay()
     {
         $this->assertEquals('foo'.PHP_EOL, $this->tester->getDisplay(), '->getDisplay() returns the display of the last execution');
-    }
-
-    public function testGetStatusCode()
-    {
-        $this->assertSame(0, $this->tester->getStatusCode(), '->getStatusCode() returns the status code');
     }
 }

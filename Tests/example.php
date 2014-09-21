@@ -38,16 +38,16 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\GenericCommand;
 use Symfony\Component\Console\Input\InputArgument;
-use Auryn\Provider as Injector;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 
 require_once __DIR__."/../vendor/autoload.php";
 
 
-
-
-
+/**
+ * Class AboutCommand - An example command. Although you can write full Command objects
+ * most of the time the GenericCommand object will be sufficient.
+ */
 class AboutCommand extends Command
 {
     function __construct() {
@@ -60,7 +60,13 @@ class AboutCommand extends Command
     }
     
     function getCallable() {
-        return null;
+        $callable = function () {
+            echo <<< END
+This is an example application that shows a few simple commands being setup and executed by Auryn.
+END;
+
+        };
+        return $callable;
     }
 
     protected function configure()
@@ -103,7 +109,7 @@ function lowrey($params) {
 $console = new Application();
 $console->add(new AboutCommand());
 
-$uploadCommand = new GenericCommand('uploadFile', 'upload');
+$uploadCommand = new GenericCommand('upload', 'uploadFile');
 $uploadCommand->addArgument('filename', InputArgument::REQUIRED, 'The name of the file to upload');
 $uploadCommand->addOption('dir', null, InputArgument::OPTIONAL, 'Which directory to upload from', './');
 
@@ -114,25 +120,26 @@ $helloWorldCallable = function ($name) {
     echo "Hello world, and particularly $name".PHP_EOL;
 };
 
-$callableCommand = new GenericCommand($helloWorldCallable, 'greet');
+$callableCommand = new GenericCommand('greet', $helloWorldCallable);
 $callableCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the person to say hello to.');
 $callableCommand->setDescription("Says hello to the world and one named person");
 $console->add($callableCommand);
 
 try {
     $parsedCommand = $console->parseCommandLine();
-    
-    $provider = new Auryn\Provider();
-    $provider->execute(
-        $parsedCommand->getCallable(),
-        lowrey($parsedCommand->getParams())
-    );
 }
 catch(\Exception $e) {
     $output = new BufferedOutput();
     $console->renderException($e, $output);
     echo $output->fetch();
+    exit(-1);
 }
+
+$provider = new Auryn\Provider();
+$provider->execute(
+    $parsedCommand->getCallable(),
+    lowrey($parsedCommand->getParams())
+);
 
 
 

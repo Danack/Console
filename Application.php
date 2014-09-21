@@ -234,17 +234,11 @@ class Application
         return implode(PHP_EOL, $messages);
     }
 
-    /**
-     * Sets whether to catch exceptions or not during commands execution.
-     *
-     * @param bool $boolean Whether to catch exceptions or not during commands execution
-     *
-     * @api
-     */
-    public function setCatchExceptions($boolean)
-    {
-        $this->catchExceptions = (bool) $boolean;
-    }
+    //Deleted - The console does not run code, and it should never be catching exceptions
+//    public function setCatchExceptions($boolean)
+//    {
+//        $this->catchExceptions = (bool) $boolean;
+//    }
 
     /**
      * Sets whether to automatically exit after a command execution or not.
@@ -333,7 +327,7 @@ class Application
      */
     public function register($name, $callable)
     {
-        return $this->add(new GenericCommand($callable, $name));
+        return $this->add(new GenericCommand($name, $callable));
     }
 
     /**

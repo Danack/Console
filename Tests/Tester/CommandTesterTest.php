@@ -24,10 +24,10 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->command = new GenericCommand('foo');
+        $callable = function ($input, $output) { $output->writeln('foo'); };
+        $this->command = new GenericCommand('foo', $callable);
         $this->command->addArgument('command');
         $this->command->addArgument('foo');
-        $this->command->setCode(function ($input, $output) { $output->writeln('foo'); });
 
         $this->tester = new CommandTester($this->command);
         $this->tester->execute(array('foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
@@ -62,19 +62,14 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo'.PHP_EOL, $this->tester->getDisplay(), '->getDisplay() returns the display of the last execution');
     }
 
-    public function testGetStatusCode()
-    {
-        $this->assertSame(0, $this->tester->getStatusCode(), '->getStatusCode() returns the status code');
-    }
 
     public function testCommandFromApplication()
     {
         $application = new Application();
         $application->setAutoExit(false);
-
-        $command = new Command('foo');
-        $command->setCode(function ($input, $output) { $output->writeln('foo'); });
-
+        $callable = function ($input, $output) { $output->writeln('foo'); };
+        $command = new GenericCommand('foo', $callable);
+        
         $application->add($command);
 
         $tester = new CommandTester($application->find('foo'));
