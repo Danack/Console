@@ -32,13 +32,13 @@
 
 
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Command\AbstractCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Output\BufferedOutput;
+use Danack\Console\Input\InputInterface;
+use Danack\Console\Output\OutputInterface;
+use Danack\Console\Application;
+use Danack\Console\Command\AbstractCommand;
+use Danack\Console\Command\Command;
+use Danack\Console\Input\InputArgument;
+use Danack\Console\Output\BufferedOutput;
 
 
 require_once __DIR__."/../vendor/autoload.php";

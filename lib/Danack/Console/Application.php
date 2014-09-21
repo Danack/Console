@@ -9,34 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Danack\Console;
+namespace Symfony\Component\Console;
 
-use Danack\Console\Descriptor\TextDescriptor;
-use Danack\Console\Descriptor\XmlDescriptor;
-use Danack\Console\Helper\DebugFormatterHelper;
-use Danack\Console\Helper\ProcessHelper;
-use Danack\Console\Helper\QuestionHelper;
-use Danack\Console\Input\InputInterface;
-use Danack\Console\Input\ArgvInput;
-use Danack\Console\Input\ArrayInput;
-use Danack\Console\Input\InputDefinition;
-use Danack\Console\Input\InputOption;
-use Danack\Console\Input\InputArgument;
-use Danack\Console\Input\InputAwareInterface;
-use Danack\Console\Output\BufferedOutput;
-use Danack\Console\Output\OutputInterface;
-use Danack\Console\Output\ConsoleOutput;
-use Danack\Console\Output\ConsoleOutputInterface;
-use Danack\Console\Command\AbstractCommand;
-use Danack\Console\Command\HelpCommand;
-use Danack\Console\Command\ListCommand;
-use Danack\Console\Helper\HelperSet;
-use Danack\Console\Helper\FormatterHelper;
-use Danack\Console\Helper\DialogHelper;
-use Danack\Console\Helper\ProgressHelper;
-use Danack\Console\Helper\TableHelper;
-use Danack\Console\Command\Command;
-use Danack\Console\Command\ParsedCommand;
+use Symfony\Component\Console\Descriptor\TextDescriptor;
+use Symfony\Component\Console\Descriptor\XmlDescriptor;
+use Symfony\Component\Console\Helper\DebugFormatterHelper;
+use Symfony\Component\Console\Helper\ProcessHelper;
+use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputAwareInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
+use Symfony\Component\Console\Command\AbstractCommand;
+use Symfony\Component\Console\Command\HelpCommand;
+use Symfony\Component\Console\Command\ListCommand;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\FormatterHelper;
+use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Helper\ProgressHelper;
+use Symfony\Component\Console\Helper\TableHelper;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\ParsedCommand;
 
 
 /**
