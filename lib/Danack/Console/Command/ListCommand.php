@@ -107,25 +107,6 @@ EOF
         return $this->createDefinition();
     }
 
-//    /**
-//     * {@inheritdoc}
-//     */
-//    protected function execute(InputInterface $input, OutputInterface $output)
-//    {
-//        $this->callable = function () use ($input)
-//        
-//        if ($input->getOption('xml')) {
-//            $input->setOption('format', 'xml');
-//        }
-//
-//        $helper = new DescriptorHelper();
-//        $helper->describe($output, $this->getApplication(), array(
-//            'format'    => $input->getOption('format'),
-//            'raw_text'  => $input->getOption('raw'),
-//            'namespace' => $input->getArgument('namespace'),
-//        ));
-//    }
-
     /**
      * {@inheritdoc}
      */

@@ -113,26 +113,4 @@ EOF
     {
         $this->command = $command;
     }
-
-//    /**
-//     * {@inheritdoc}
-//     */
-//    protected function execute(InputInterface $input, OutputInterface $output)
-//    {
-//        if (null === $this->command) {
-//            $this->command = $this->getApplication()->find($input->getArgument('command_name'));
-//        }
-//
-//        if ($input->getOption('xml')) {
-//            $input->setOption('format', 'xml');
-//        }
-//
-//        $helper = new DescriptorHelper();
-//        $helper->describe($output, $this->command, array(
-//            'format' => $input->getOption('format'),
-//            'raw'    => $input->getOption('raw'),
-//        ));
-//
-//        $this->command = null;
-//    }
 }

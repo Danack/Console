@@ -164,8 +164,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
-
         $tester = new ApplicationTester($application);
         $tester->run(array('-h' => true, '-q' => true), array('decorated' => false));
 
@@ -542,7 +540,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
         $application->add($command = new \Foo1Command());
         $_SERVER['argv'] = array('cli.php', 'foo:bar1');
 
@@ -555,7 +552,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
 
         $this->ensureStaticCommandHelp($application);
         $tester = new ApplicationTester($application);
@@ -619,7 +615,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
         $application->add(new \FooCommand());
         $tester = new ApplicationTester($application);
 
@@ -641,7 +636,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
         $application->add(new \FooCommand());
 
         $output = new StreamOutput(fopen('php://memory', 'w', false));
@@ -652,36 +646,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $input = new ArgvInput(array('cli.php', '--verbose', 'foo:bar'));
         $application->parseCommandLine($input, $output);
     }
-
-//    public function testRunReturnsIntegerExitCode()
-//    {
-//        $exception = new \Exception('', 4);
-//
-//        $application = $this->getMock('Danack\Console\Application', array('doRun'));
-//        $application->setAutoExit(false);
-//        $application->expects($this->once())
-//             ->method('doRun')
-//             ->will($this->throwException($exception));
-//
-//        $exitCode = $application->run(new ArrayInput(array()), new NullOutput());
-//
-//        $this->assertSame(4, $exitCode, '->run() returns integer exit code extracted from raised exception');
-//    }
-
-//    public function testRunReturnsExitCodeOneForExceptionCodeZero()
-//    {
-//        $exception = new \Exception('', 0);
-//
-//        $application = $this->getMock('Danack\Console\Application', array('doRun'));
-//        $application->setAutoExit(false);
-//        $application->expects($this->once())
-//             ->method('doRun')
-//             ->will($this->throwException($exception));
-//
-//        $exitCode = $application->run(new ArrayInput(array()), new NullOutput());
-//
-//        $this->assertSame(1, $exitCode, '->run() returns exit code 1 when exception code is 0');
-//    }
 
     /**
      * @expectedException \LogicException
@@ -694,7 +658,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
         $application
             ->register('foo', $code)
             ->setDefinition(array($def));
@@ -717,8 +680,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
-
         $helperSet = $application->getHelperSet();
 
         $this->assertTrue($helperSet->has('formatter'));
@@ -730,8 +691,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
-
         $application->setHelperSet(new HelperSet(array(new FormatterHelper())));
 
         $helperSet = $application->getHelperSet();
@@ -747,7 +706,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new CustomApplication();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
 
         $application->setHelperSet(new HelperSet(array(new FormatterHelper())));
 
@@ -764,8 +722,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
-
         $inputDefinition = $application->getDefinition();
 
         $this->assertTrue($inputDefinition->hasArgument('command'));
@@ -783,7 +739,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new CustomApplication();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
 
         $inputDefinition = $application->getDefinition();
 
@@ -805,8 +760,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $application->setAutoExit(false);
-        //$application->setCatchExceptions(false);
-
         $application->setDefinition(new InputDefinition(array(new InputOption('--custom', '-c', InputOption::VALUE_NONE, 'Set the custom input definition.'))));
 
         $inputDefinition = $application->getDefinition();
@@ -824,43 +777,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($inputDefinition->hasOption('custom'));
     }
-
-//    public function testRunWithDispatcher()
-//    {
-//        $application = new Application();
-//        $application->setAutoExit(false);
-//        $application->setDispatcher($this->getDispatcher());
-//
-//        $application->register('foo')->setCode(function (InputInterface $input, OutputInterface $output) {
-//            $output->write('foo.');
-//        });
-//
-//        $tester = new ApplicationTester($application);
-//        $tester->run(array('command' => 'foo'));
-//        $this->assertEquals('before.foo.after.', $tester->getDisplay());
-//    }
-
-//    /**
-//     * @expectedException        \LogicException
-//     * @expectedExceptionMessage caught
-//     */
-//    public function testRunWithExceptionAndDispatcher()
-//    {
-//        $application = new Application();
-//        $application->setDispatcher($this->getDispatcher());
-//        $application->setAutoExit(false);
-//        $application->setCatchExceptions(false);
-//
-//        $application->register('foo')->setCode(function (InputInterface $input, OutputInterface $output) {
-//            throw new \RuntimeException('foo');
-//        });
-//
-//        $tester = new ApplicationTester($application);
-//        $tester->run(array('command' => 'foo'));
-//    }
-
-
-
 
     public function testTerminalDimensions()
     {

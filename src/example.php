@@ -87,9 +87,6 @@ EOT
 
 
 
-
-
-
 function uploadFile($filename, $dir) {
     echo "Need to upload the file $filename in the directory $dir".PHP_EOL;
 }
