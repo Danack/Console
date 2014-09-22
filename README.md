@@ -12,30 +12,28 @@ Basically although most of the Symfony/console library does a great job, the fac
 
 The example below shows how to create commands with a callable, have the console application 'route' the input, and then run the callable with [Auryn](https://github.com/rdlowrey/Auryn).
 
-```
 
+```php
 $console = new Application();
 $console->add(new AboutCommand());
 
-//Create a command that will call the function 'uploadFile'
+// Create a command that will call the function 'uploadFile'
 $uploadCommand = new Command('uploadFile', 'upload');
 $uploadCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the thing to foo');
 $console->add($uploadCommand);
-
 
 $helloWorldCallable = function ($name) {
     echo "Hello world, and particularly $name".PHP_EOL;
 };
 
-//Create a command that will call the closure
+// Create a command that will call the closure
 $callableCommand = new Command($helloWorldCallable, 'greet');
 $callableCommand->addArgument('name', InputArgument::REQUIRED, 'The name of the person to say hello to.');
 $console->add($callableCommand);
 
 try {
     $parsedCommand = $console->parseCommandLine();
-}
-catch(\Exception $e) {
+} catch (\Exception $e) {
     $output = new BufferedOutput();
     $console->renderException($e, $output);
     echo $output->fetch();
@@ -49,12 +47,11 @@ $provider->execute(
 );
 
 
-
 function uploadFile($filename) {
     echo "Need to upload the file $filename".PHP_EOL;
 }
 
-//Auryn needs scalars prefixed with a colon
+// Auryn needs scalars prefixed with a colon
 function lowrey($params) {
     $newParams = [];
     foreach ($params as $key => $value) {
@@ -62,8 +59,6 @@ function lowrey($params) {
     }
     return $newParams;
 }
-
-
 ```
 
 If the example above was in the file example.php running the command `php example.php greet Danack` would output:
@@ -109,9 +104,11 @@ Tests
 
 You can run the unit tests with the following command:
 
-    $ cd path/to/Symfony/Component/Console/
-    $ composer.phar install
-    $ phpunit
+```bash
+$ cd path/to/Symfony/Component/Console/
+$ composer.phar install
+$ phpunit
+```
 
 Third Party
 -----------
