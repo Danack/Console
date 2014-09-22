@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Refactored Symfony Console Component",
     "keywords": ["console", "cli"],
-    "homepage": "http://basereality.com",
+    "homepage": "http://console.basereality.com/",
     "license": "MIT",
     "authors": [
         {
