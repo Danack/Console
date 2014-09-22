@@ -48,9 +48,6 @@ abstract class AbstractCommand implements Dispatchable
     private $synopsis;
     private $helperSet;
 
-    //@TODO - remove every override - this method should no longer exist
-    //final private function execute(InputInterface $input, OutputInterface $output) {}
-    
     /**
      * Constructor.
      *

@@ -22,57 +22,10 @@ use Danack\Console\Output\OutputInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HelpCommand extends AbstractCommand
+class HelpCommand extends SymfonyCommand
 {
     private $command;
-    /**
-     * @var InputInterface
-     */
-    private $input;
-    /**
-     * @var OutputInterface
-     */
-    private $output;
-
-    function getCallable() {
-        $callable = function () {
-            if ($this->input->getOption('xml')) {
-                $this->input->setOption('format', 'xml');
-            }
-            $helper = new DescriptorHelper();
-            $helper->describe($this->output, $this->command, array(
-                'format' => $this->input->getOption('format'),
-                'raw'    => $this->input->getOption('raw'),
-            ));
-
-            $this->command = null;//Dafuq is this shit?
-        };
-        
-        return $callable;
-    }
     
-
-    /**
-     * Return an array of parameters that should be passed to the callable.
-     * They should have the correct name indexes, the order does not matter
-     * as Auryn will inject them correctly.
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return array
-     */
-    function parseInput(InputInterface $input, OutputInterface $output) {
-
-        if (null === $this->command) {
-            $this->command = $this->getApplication()->find($input->getArgument('command_name'));
-        }
-
-        $this->input = $input;
-        $this->output = $output;
-        
-        return [];
-    }
-
-
     /**
      * {@inheritdoc}
      */
@@ -113,4 +66,28 @@ EOF
     {
         $this->command = $command;
     }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        if (null === $this->command) {
+            $this->command = $this->getApplication()->find($input->getArgument('command_name'));
+        }
+
+        if ($input->getOption('xml')) {
+            $input->setOption('format', 'xml');
+        }
+
+        $helper = new DescriptorHelper();
+        $helper->describe($output, $this->command, array(
+                'format' => $input->getOption('format'),
+                'raw'    => $input->getOption('raw'),
+            ));
+
+        $this->command = null;
+    }
+    
 }
