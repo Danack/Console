@@ -6,7 +6,11 @@ namespace Danack\Console\Command;
 use Danack\Console\Input\InputInterface;
 use Danack\Console\Output\OutputInterface;
 
-
+/**
+ * Class ParsedCommand Holds the information about what should be called, with what params
+ * as a result of parsing the command line options in 'Application'.
+ * @package Danack\Console\Command
+ */
 class ParsedCommand {
 
     /**
