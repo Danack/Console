@@ -33,7 +33,8 @@ $console->add($callableCommand);
 
 try {
     $parsedCommand = $console->parseCommandLine();
-} catch (\Exception $e) {
+}
+catch (\Exception $e) {
     $output = new BufferedOutput();
     $console->renderException($e, $output);
     echo $output->fetch();
