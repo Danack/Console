@@ -16,6 +16,7 @@ use Danack\Console\Input\ArrayInput;
 use Danack\Console\Output\StreamOutput;
 use Danack\Console\Input\InputInterface;
 use Danack\Console\Output\OutputInterface;
+use Danack\Console\Command\ParsedCommand;
 
 /**
  * Eases the testing of console commands.
@@ -52,7 +53,7 @@ class CommandTester
      * @param array $input   An array of arguments and options
      * @param array $options An array of options
      *
-     * @return int     The command exit code
+     * @return ParsedCommand     The command exit code
      */
     public function execute(array $input, array $options = array())
     {

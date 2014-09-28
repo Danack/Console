@@ -14,22 +14,36 @@ namespace Danack\Console\Tests\Tester;
 use Danack\Console\Application;
 use Danack\Console\Output\Output;
 use Danack\Console\Tester\ApplicationTester;
+use Auryn\Provider;
+use Danack\Console\Command\ParsedCommand;
 
 class ApplicationTesterTest extends \PHPUnit_Framework_TestCase
 {
     protected $application;
+    
+    /** @var  ApplicationTester */
     protected $tester;
 
+    /** @var  ParsedCommand */
+    protected $parsedCommand;
+
+    /** @var  Provider */
+    protected $provider;
+    
     protected function setUp()
     {
         $this->application = new Application();
         $this->application->setAutoExit(false);
-        $callable = function ($input, $output) { $output->writeln('foo'); };
+        $callable = function (Output $output) { 
+            $output->writeln('foo'); 
+        };
         $this->application->register('foo', $callable)
             ->addArgument('foo');
 
         $this->tester = new ApplicationTester($this->application);
-        $this->tester->run(array('command' => 'foo', 'foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
+        $this->provider = new Provider();
+
+        $this->parsedCommand = $this->tester->run(array('command' => 'foo', 'foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
     }
 
     protected function tearDown()
@@ -52,12 +66,33 @@ class ApplicationTesterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOutput()
     {
+        $output = $this->tester->getOutput();
+        $this->provider->alias(
+            'Danack\Console\Output\Output',
+            get_class($output)
+        );
+
+        $this->provider->share($output);
+        $callable = $this->parsedCommand->getCallable();
+        $this->provider->execute($callable, []);
+        
         rewind($this->tester->getOutput()->getStream());
-        $this->assertEquals('foo'.PHP_EOL, stream_get_contents($this->tester->getOutput()->getStream()), '->getOutput() returns the current output instance');
+        $contents = stream_get_contents($this->tester->getOutput()->getStream());
+        $this->assertEquals('foo'.PHP_EOL, $contents, '->getOutput() returns the current output instance');
     }
 
     public function testGetDisplay()
     {
+        $output = $this->tester->getOutput();
+        $this->provider->alias(
+            'Danack\Console\Output\Output',
+            get_class($output)
+        );
+
+        $this->provider->share($output);
+        $callable = $this->parsedCommand->getCallable();
+        $this->provider->execute($callable, []);
+        
         $this->assertEquals('foo'.PHP_EOL, $this->tester->getDisplay(), '->getDisplay() returns the display of the last execution');
     }
 }

@@ -16,21 +16,37 @@ use Danack\Console\Command\AbstractCommand;
 use Danack\Console\Output\Output;
 use Danack\Console\Tester\CommandTester;
 use Danack\Console\Command\Command;
+use Danack\Console\Command\ParsedCommand;
+use Auryn\Provider;
 
 class CommandTesterTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var  Command */
     protected $command;
+    
+    /** @var  CommandTester */
     protected $tester;
 
+    /** @var  ParsedCommand */
+    protected $parsedCommand;
+
+    /** @var  Provider */
+    protected $provider;
+    
     protected function setUp()
     {
-        $callable = function ($input, $output) { $output->writeln('foo'); };
+        $callable = function (Output $output) { 
+            $output->writeln('foo'); 
+        };
         $this->command = new Command('foo', $callable);
         $this->command->addArgument('command');
         $this->command->addArgument('foo');
-
         $this->tester = new CommandTester($this->command);
-        $this->tester->execute(array('foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
+
+        $this->provider = new Provider();
+
+
+        $this->parsedCommand = $this->tester->execute(array('foo' => 'bar'), array('interactive' => false, 'decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
     }
 
     protected function tearDown()
@@ -53,13 +69,31 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOutput()
     {
+        $this->provider->alias(
+            'Danack\Console\Output\Output',
+            get_class($this->tester->getOutput())
+        );
+
+        $this->provider->share($this->tester->getOutput());
+        
+        $this->provider->execute($this->parsedCommand->getCallable(), []);
         rewind($this->tester->getOutput()->getStream());
         $this->assertEquals('foo'.PHP_EOL, stream_get_contents($this->tester->getOutput()->getStream()), '->getOutput() returns the current output instance');
     }
 
     public function testGetDisplay()
     {
-        $this->assertEquals('foo'.PHP_EOL, $this->tester->getDisplay(), '->getDisplay() returns the display of the last execution');
+        $this->provider->alias(
+            'Danack\Console\Output\Output',
+            get_class($this->tester->getOutput())
+        );
+
+        $this->provider->share($this->tester->getOutput());
+
+        $callable = $this->parsedCommand->getCallable();
+        $this->provider->execute($callable, []);
+        $foo = $this->tester->getDisplay();
+        $this->assertEquals('foo'.PHP_EOL, $foo, '->getDisplay() returns the display of the last execution');
     }
 
 
@@ -73,8 +107,7 @@ class CommandTesterTest extends \PHPUnit_Framework_TestCase
         $application->add($command);
 
         $tester = new CommandTester($application->find('foo'));
-
-        // check that there is no need to pass the command name here
-        $this->assertEquals(0, $tester->execute(array()));
+        $result = $tester->execute(array());
+        $this->assertInstanceOf('Danack\Console\Command\ParsedCommand', $result);
     }
 }
