@@ -2,6 +2,8 @@
 Console Router
 ==============
 
+[![Build Status](https://travis-ci.org/Danack/Console.svg?branch=master)](https://travis-ci.org/Danack/Console)
+
 This is not the Symfony console - it is a forking refactor to:
 
 * To split the 'routing' and dispatching of commands.
