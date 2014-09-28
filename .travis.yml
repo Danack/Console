@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.5
+  - 5.6
   - 5.5
   - 5.4
   - hhvm
@@ -9,7 +9,7 @@ php:
 before_script:
   - composer install
   
-script: php ./vendor/bin/phpunit --configuration phpunit.xml --coverage-text
+script: php ./vendor/bin/phpunit --configuration Tests/phpunit.xml.dist --coverage-text
 
 notifications:
   email:
