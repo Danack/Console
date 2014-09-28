@@ -9,9 +9,14 @@
 <footer class="footer">
     <div class="container">
         <p class="pull-right">
-            <a href="https://github.com/Danack/Console/issues" style="margin-right: 30px">Report an issue</a>
+            <a href="https://github.com/Danack/Console/issues" style="margin-right: 30px">
+                Report an issue
+            </a>
+
+            {% include "footerRelations.html" %}
             
-            <a href="#">Back to top</a>
+            <!-- <a href="#">Back to top</a> -->
+
             {% if theme_source_link_position == "footer" %}
             <br/>
             {% include "sourcelink.html" %}
