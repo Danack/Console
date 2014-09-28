@@ -48,42 +48,26 @@ require_once __DIR__."/../vendor/autoload.php";
  * Class AboutCommand - An example command. Although you can write full Command objects
  * most of the time the GenericCommand object will be sufficient.
  */
-class AboutCommand extends AbstractCommand
-{
-    function __construct() {
-        parent::__construct('about');
-        $this->configure();
-    }
+class AboutCommand extends AbstractCommand {
 
     function parseInput(InputInterface $input, OutputInterface $output) {
         return [];
     }
-    
-    function getCallable() {
-        $callable = function () {
-            echo <<< END
-This is an example application that shows a few simple commands being setup and executed by Auryn.
-END;
 
-        };
-        return $callable;
+    function getCallable() {
+        return [$this, 'displayAbout'];
     }
 
-    protected function configure()
-    {
-        $this
-            ->setName('about')
-            ->setDescription('Short information about danack/console')
-            ->setHelp(<<<EOT
-<info>This is an example 'application' of the forked version of symfony console.
+    function displayAbout() {
+        echo "This is an example application that shows a few simple commands being setup and executed by Auryn.";
+    }
 
-It was forked because you should be able to use a console processing library to process 
-command line options without having to let it manage your code for you.
-</info>
-EOT
-             );
+    protected function configure() {
+        $this->setName('about')->
+            setDescription('Short information about danack/console');
     }
 }
+
 
 
 
