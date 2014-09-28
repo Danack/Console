@@ -474,70 +474,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $tester = new ApplicationTester($application);
 
         $this->setExpectedException('InvalidArgumentException');
-        
+
         $tester->run(array('command' => 'foo'), array('decorated' => false));
-        
-        
-        
-//        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception1.txt', $tester->getDisplay(true), '->renderException() renders a pretty exception');
-//
-//        $tester->run(array('command' => 'foo'), array('decorated' => false, 'verbosity' => Output::VERBOSITY_VERBOSE));
-//        $this->assertContains('Exception trace', $tester->getDisplay(), '->renderException() renders a pretty exception with a stack trace when verbosity is verbose');
-//
-//        $tester->run(array('command' => 'list', '--foo' => true), array('decorated' => false));
-//        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception2.txt', $tester->getDisplay(true), '->renderException() renders the command synopsis when an exception occurs in the context of a command');
-//
-//        $application->add(new \Foo3Command());
-//        $tester = new ApplicationTester($application);
-//        $tester->run(array('command' => 'foo3:bar'), array('decorated' => false));
-//        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception3.txt', $tester->getDisplay(true), '->renderException() renders a pretty exceptions with previous exceptions');
-//
-//        $tester->run(array('command' => 'foo3:bar'), array('decorated' => true));
-//        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception3decorated.txt', $tester->getDisplay(true), '->renderException() renders a pretty exceptions with previous exceptions');
-//
-//        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
-//        $application->setAutoExit(false);
-//        $application->expects($this->any())
-//            ->method('getTerminalWidth')
-//            ->will($this->returnValue(32));
-//        $tester = new ApplicationTester($application);
-//
-//        $tester->run(array('command' => 'foo'), array('decorated' => false));
-//        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception4.txt', $tester->getDisplay(true), '->renderException() wraps messages when they are bigger than the terminal');
     }
 
-    public function testRenderExceptionWithDoubleWidthCharacters()
-    {
-        $callable = function (){
-            throw new \Exception('エラーメッセージ'); 
-        };
-        
-        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
-        $application->setAutoExit(false);
-        $application->expects($this->any())
-            ->method('getTerminalWidth')
-            ->will($this->returnValue(120));
-        $application->register('foo', $callable);
-        $tester = new ApplicationTester($application);
 
-        $tester->run(array('command' => 'foo'), array('decorated' => false));
-        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception_doublewidth1.txt', $tester->getDisplay(true), '->renderException() renderes a pretty exceptions with previous exceptions');
-
-        $tester->run(array('command' => 'foo'), array('decorated' => true));
-        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception_doublewidth1decorated.txt', $tester->getDisplay(true), '->renderException() renderes a pretty exceptions with previous exceptions');
-
-        $application = $this->getMock('Danack\Console\Application', array('getTerminalWidth'));
-        $application->setAutoExit(false);
-        $application->expects($this->any())
-            ->method('getTerminalWidth')
-            ->will($this->returnValue(32));
-        $application->register('foo')->setCode(function () {
-            throw new \Exception('コマンドの実行中にエラーが発生しました。');
-        });
-        $tester = new ApplicationTester($application);
-        $tester->run(array('command' => 'foo'), array('decorated' => false));
-        $this->assertStringEqualsFile(self::$fixturesPath.'/application_renderexception_doublewidth2.txt', $tester->getDisplay(true), '->renderException() wraps messages when they are bigger than the terminal');
-    }
 
     public function testRun()
     {

@@ -16,6 +16,7 @@ use Danack\Console\Input\ArrayInput;
 use Danack\Console\Input\InputInterface;
 use Danack\Console\Output\OutputInterface;
 use Danack\Console\Output\StreamOutput;
+use Danack\Console\Command\ParsedCommand;
 
 /**
  * Eases the testing of console applications.
@@ -32,7 +33,6 @@ class ApplicationTester
     private $application;
     private $input;
     private $output;
-    private $statusCode;
 
     /**
      * Constructor.
@@ -57,7 +57,7 @@ class ApplicationTester
      * @param array $input   An array of arguments and options
      * @param array $options An array of options
      *
-     * @return int     The command exit code
+     * @return ParsedCommand     The command exit code
      */
     public function run(array $input, $options = array())
     {
@@ -74,7 +74,7 @@ class ApplicationTester
             $this->output->setVerbosity($options['verbosity']);
         }
 
-        return $this->statusCode = $this->application->parseCommandLine($this->input, $this->output);
+        return $this->application->parseCommandLine($this->input, $this->output);
     }
 
     /**
@@ -117,13 +117,4 @@ class ApplicationTester
         return $this->output;
     }
 
-    /**
-     * Gets the status code returned by the last execution of the application.
-     *
-     * @return int     The status code
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
 }
