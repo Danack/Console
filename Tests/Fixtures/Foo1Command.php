@@ -10,11 +10,18 @@ class Foo1Command extends AbstractCommand
     public $output;
 
     function parseInput(InputInterface $input, OutputInterface $output) {
+        $this->input = $input;
+        $this->output = $output;
+        
         return [];
     }
 
     function getCallable() {
-        return null;
+        $callable = function() {
+            return $this->execute($this->input, $this->output);
+        };
+
+        return $callable;
     }
 
     protected function configure()

@@ -114,9 +114,16 @@ class Application
         }
 
         $this->configureIO($input, $output);
-        $callableAndParams = $this->doRun($input, $output);
+        $parsedCommand = $this->doRun($input, $output);
+        
+        if (!($parsedCommand instanceof ParsedCommand)) {
+            throw new ConsoleException(
+                "Parsing commands did not result in a ParsedCommand, but instead a: ".
+                var_export($parsedCommand, true)
+            );
+        }
 
-        return $callableAndParams;
+        return $parsedCommand;
     }
 
     /**
@@ -130,9 +137,11 @@ class Application
     public function doRun(InputInterface $input, OutputInterface $output)
     {
         if (true === $input->hasParameterOption(array('--version', '-V'))) {
-            $output->writeln($this->getLongVersion());
-
-            return 0;
+            $callable = function () use ($output) {
+                $output->writeln($this->getLongVersion());
+            };
+            
+            return new ParsedCommand($callable, [], $input, $output);
         }
 
         $name = $this->getCommandName($input);

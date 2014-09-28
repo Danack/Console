@@ -500,61 +500,84 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->ensureStaticCommandHelp($application);
         $tester = new ApplicationTester($application);
 
-        $tester->run(array(), array('decorated' => false));
+        $provider = new Provider();
+        //TODO - this should be in a loop with data defined in an array
+        
+        $parsedCommand = $tester->run(array(), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
+        
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run1.txt', $tester->getDisplay(true), '->run() runs the list command if no argument is passed');
 
-        $tester->run(array('--help' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('--help' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run2.txt', $tester->getDisplay(true), '->run() runs the help command if --help is passed');
 
-        $tester->run(array('-h' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('-h' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run2.txt', $tester->getDisplay(true), '->run() runs the help command if -h is passed');
 
-        $tester->run(array('command' => 'list', '--help' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('command' => 'list', '--help' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run3.txt', $tester->getDisplay(true), '->run() displays the help if --help is passed');
 
-        $tester->run(array('command' => 'list', '-h' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('command' => 'list', '-h' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run3.txt', $tester->getDisplay(true), '->run() displays the help if -h is passed');
 
-        $tester->run(array('--ansi' => true));
+        $parsedCommand = $tester->run(array('--ansi' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertTrue($tester->getOutput()->isDecorated(), '->run() forces color output if --ansi is passed');
 
-        $tester->run(array('--no-ansi' => true));
+        $parsedCommand = $tester->run(array('--no-ansi' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertFalse($tester->getOutput()->isDecorated(), '->run() forces color output to be disabled if --no-ansi is passed');
 
-        $tester->run(array('--version' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('--version' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run4.txt', $tester->getDisplay(true), '->run() displays the program version if --version is passed');
 
-        $tester->run(array('-V' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('-V' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertStringEqualsFile(self::$fixturesPath.'/application_run4.txt', $tester->getDisplay(true), '->run() displays the program version if -v is passed');
 
-        $tester->run(array('command' => 'list', '--quiet' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '--quiet' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame('', $tester->getDisplay(), '->run() removes all output if --quiet is passed');
 
-        $tester->run(array('command' => 'list', '-q' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '-q' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame('', $tester->getDisplay(), '->run() removes all output if -q is passed');
 
-        $tester->run(array('command' => 'list', '--verbose' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '--verbose' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if --verbose is passed');
 
-        $tester->run(array('command' => 'list', '--verbose' => 1));
+        $parsedCommand = $tester->run(array('command' => 'list', '--verbose' => 1));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if --verbose=1 is passed');
 
-        $tester->run(array('command' => 'list', '--verbose' => 2));
+        $parsedCommand = $tester->run(array('command' => 'list', '--verbose' => 2));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to very verbose if --verbose=2 is passed');
 
-        $tester->run(array('command' => 'list', '--verbose' => 3));
+        $parsedCommand = $tester->run(array('command' => 'list', '--verbose' => 3));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_DEBUG, $tester->getOutput()->getVerbosity(), '->run() sets the output to debug if --verbose=3 is passed');
 
-        $tester->run(array('command' => 'list', '--verbose' => 4));
+        $parsedCommand = $tester->run(array('command' => 'list', '--verbose' => 4));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if unknown --verbose level is passed');
 
-        $tester->run(array('command' => 'list', '-v' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '-v' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if -v is passed');
 
-        $tester->run(array('command' => 'list', '-vv' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '-vv' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_VERY_VERBOSE, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if -v is passed');
 
-        $tester->run(array('command' => 'list', '-vvv' => true));
+        $parsedCommand = $tester->run(array('command' => 'list', '-vvv' => true));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame(Output::VERBOSITY_DEBUG, $tester->getOutput()->getVerbosity(), '->run() sets the output to verbose if -v is passed');
 
         $application = new Application();
@@ -562,10 +585,12 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $application->add(new \FooCommand());
         $tester = new ApplicationTester($application);
 
-        $tester->run(array('command' => 'foo:bar', '--no-interaction' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('command' => 'foo:bar', '--no-interaction' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame('called'.PHP_EOL, $tester->getDisplay(), '->run() does not call interact() if --no-interaction is passed');
 
-        $tester->run(array('command' => 'foo:bar', '-n' => true), array('decorated' => false));
+        $parsedCommand = $tester->run(array('command' => 'foo:bar', '-n' => true), array('decorated' => false));
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertSame('called'.PHP_EOL, $tester->getDisplay(), '->run() does not call interact() if -n is passed');
     }
 
@@ -747,16 +772,19 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $application->setAutoExit(false);
         $application->add($command);
         $application->setDefaultCommand($command->getName());
-
         $tester = new ApplicationTester($application);
-        $tester->run(array());
+        $parsedCommand = $tester->run(array());
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
+        
         $this->assertEquals('interact called'.PHP_EOL.'called'.PHP_EOL, $tester->getDisplay(), 'Application runs the default set command if different from \'list\' command');
 
         $application = new CustomDefaultCommandApplication();
         $application->setAutoExit(false);
 
         $tester = new ApplicationTester($application);
-        $tester->run(array());
+        $parsedCommand = $tester->run(array());
+        $provider->execute($parsedCommand->getCallable(), []);
 
         $this->assertEquals('interact called'.PHP_EOL.'called'.PHP_EOL, $tester->getDisplay(), 'Application runs the default set command if different from \'list\' command');
     }
