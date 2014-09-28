@@ -12,11 +12,12 @@
 namespace Danack\Console\Question;
 
 /**
- * Represents a choice question.
+ * Represents a Option question, which is exactly the same as a choice question,
+ * except that it returns the options as the value instead of the text describing them
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ChoiceQuestion extends Question
+class OptionQuestion extends Question
 {
     private $choices;
     private $multiselect = false;
@@ -125,14 +126,14 @@ class ChoiceQuestion extends Question
                 if (empty($choices[$value])) {
                     throw new \InvalidArgumentException(sprintf($errorMessage, $value));
                 }
-                array_push($multiselectChoices, $choices[$value]);
+                array_push($multiselectChoices, $value);
             }
 
             if ($multiselect) {
                 return $multiselectChoices;
             }
 
-            return $choices[$selected];
+            return $selected;
         };
     }
 

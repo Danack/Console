@@ -112,20 +112,19 @@ class QuestionHelper extends Helper
         $inputStream = $this->inputStream ?: STDIN;
 
         $message = $question->getQuestion();
-        if ($question instanceof ChoiceQuestion) {
-            $width = max(array_map('strlen', array_keys($question->getChoices())));
+        
+        $modifiedMessage = $question->getTextAndPrompt();
 
-            $messages = (array) $question->getQuestion();
-            foreach ($question->getChoices() as $key => $value) {
-                $messages[] = sprintf("  [<info>%-${width}s</info>] %s", $key, $value);
-            }
-
-            $output->writeln($messages);
-
-            $message = $question->getPrompt();
+        // This is not the best coding style, but it's removes the instanceof
+        // check at least.
+        if ($modifiedMessage) {
+            list($text, $message) = $modifiedMessage;
+            $output->writeln($text);
+            $output->write($message);
         }
-
-        $output->write($message);
+        else {
+            $output->write($message);
+        }
 
         $autocomplete = $question->getAutocompleterValues();
         if (null === $autocomplete || !$this->hasSttyAvailable()) {

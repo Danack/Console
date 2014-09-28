@@ -235,4 +235,14 @@ class Question
     {
         return $this->normalizer;
     }
+
+    /**
+     * Some questions need to modify how they are displayed. See method 'doAsk()' in
+     * QuestionHelper for the gory details.
+     * @return null
+     */
+    function getTextAndPrompt()
+    {
+        return null;
+    }
 }
