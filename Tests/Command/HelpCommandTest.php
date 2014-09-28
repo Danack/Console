@@ -15,6 +15,7 @@ use Danack\Console\Tester\CommandTester;
 use Danack\Console\Command\HelpCommand;
 use Danack\Console\Command\ListCommand;
 use Danack\Console\Application;
+use Auryn\Provider;
 
 class HelpCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +24,9 @@ class HelpCommandTest extends \PHPUnit_Framework_TestCase
         $command = new HelpCommand();
         $command->setApplication(new Application());
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command_name' => 'li'));
+        $parsedCommand = $commandTester->execute(array('command_name' => 'li'));
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertRegExp('/list \[--xml\] \[--raw\] \[--format="\.\.\."\] \[namespace\]/', $commandTester->getDisplay(), '->execute() returns a text help for the given command alias');
     }
 
@@ -32,7 +35,9 @@ class HelpCommandTest extends \PHPUnit_Framework_TestCase
         $command = new HelpCommand();
         $commandTester = new CommandTester($command);
         $command->setCommand(new ListCommand());
-        $commandTester->execute(array());
+        $parsedCommand = $commandTester->execute(array());
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertRegExp('/list \[--xml\] \[--raw\] \[--format="\.\.\."\] \[namespace\]/', $commandTester->getDisplay(), '->execute() returns a text help for the given command');
     }
 
@@ -41,7 +46,9 @@ class HelpCommandTest extends \PHPUnit_Framework_TestCase
         $command = new HelpCommand();
         $commandTester = new CommandTester($command);
         $command->setCommand(new ListCommand());
-        $commandTester->execute(array('--format' => 'xml'));
+        $parsedCommand = $commandTester->execute(array('--format' => 'xml'));
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertRegExp('/<command/', $commandTester->getDisplay(), '->execute() returns an XML help text if --xml is passed');
     }
 
@@ -49,7 +56,9 @@ class HelpCommandTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $commandTester = new CommandTester($application->get('help'));
-        $commandTester->execute(array('command_name' => 'list'));
+        $parsedCommand = $commandTester->execute(array('command_name' => 'list'));
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertRegExp('/list \[--xml\] \[--raw\] \[--format="\.\.\."\] \[namespace\]/', $commandTester->getDisplay(), '->execute() returns a text help for the given command');
     }
 
@@ -57,7 +66,9 @@ class HelpCommandTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $commandTester = new CommandTester($application->get('help'));
-        $commandTester->execute(array('command_name' => 'list', '--format' => 'xml'));
+        $parsedCommand = $commandTester->execute(array('command_name' => 'list', '--format' => 'xml'));
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
         $this->assertRegExp('/list \[--xml\] \[--raw\] \[--format="\.\.\."\] \[namespace\]/', $commandTester->getDisplay(), '->execute() returns a text help for the given command');
         $this->assertRegExp('/<command/', $commandTester->getDisplay(), '->execute() returns an XML help text if --format=xml is passed');
     }

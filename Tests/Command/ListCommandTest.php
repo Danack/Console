@@ -14,6 +14,7 @@ namespace Danack\Console\Tests\Command;
 use Danack\Console\Tester\CommandTester;
 use Danack\Console\Application;
 use Danack\Console\Command\ParsedCommand;
+use Auryn\Provider;
 
 class ListCommandTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,7 +35,11 @@ class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $commandTester = new CommandTester($command = $application->get('list'));
-        $commandTester->execute(array('command' => $command->getName(), '--format' => 'xml'));
+        $parsedCommand = $commandTester->execute(array('command' => $command->getName(), '--format' => 'xml'));
+
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
+        
         $this->assertRegExp('/<command id="list" name="list">/', $commandTester->getDisplay(), '->execute() returns a list of available commands in XML if --xml is passed');
     }
 
@@ -42,7 +47,10 @@ class ListCommandTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $commandTester = new CommandTester($command = $application->get('list'));
-        $commandTester->execute(array('command' => $command->getName(), '--raw' => true));
+        $parsedCommand = $commandTester->execute(array('command' => $command->getName(), '--raw' => true));
+        $provider = new Provider();
+        $provider->execute($parsedCommand->getCallable(), []);
+        
         $output = <<<EOF
 help   Displays help for a command
 list   Lists commands

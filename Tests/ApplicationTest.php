@@ -25,7 +25,7 @@ use Danack\Console\Output\Output;
 use Danack\Console\Output\OutputInterface;
 use Danack\Console\Output\StreamOutput;
 use Danack\Console\Tester\ApplicationTester;
-
+use Auryn\Provider;
 
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase
