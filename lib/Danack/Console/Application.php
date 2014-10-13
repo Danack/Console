@@ -311,11 +311,20 @@ class Application
      */
     public function getLongVersion()
     {
-        if ('UNKNOWN' !== $this->getName() && 'UNKNOWN' !== $this->getVersion()) {
-            return sprintf('<info>%s</info> version <comment>%s</comment>', $this->getName(), $this->getVersion());
+        $longVersion = '';
+        
+        if ('UNKNOWN' !== $this->getName() ) {
+            $longVersion .= sprintf('<info>%s</info>', $this->getName());
+        }
+        else {
+            $longVersion .= '<info>Console Tool</info>';
         }
 
-        return '<info>Console Tool</info>';
+        if ('UNKNOWN' !== $this->getVersion()) {
+            $longVersion .= sprintf(' version <comment>%s</comment>', $this->getVersion());
+        }
+
+        return $longVersion;
     }
 
     /**
