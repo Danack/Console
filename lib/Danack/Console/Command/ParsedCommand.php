@@ -32,7 +32,14 @@ class ParsedCommand {
      */
     private $output;
 
-    function __construct(callable $callable = null, array $params = null, InputInterface $input, OutputInterface $output) {
+    /**
+     * @param null $callable What should be called to execute this command. Not
+     * typehinted to callable, to allow custom schemas
+     * @param array $params
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    function __construct($callable = null, array $params = null, InputInterface $input, OutputInterface $output) {
         $this->callable = $callable;
         $this->input = $input;
         $this->output = $output;
