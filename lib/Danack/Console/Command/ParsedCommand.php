@@ -39,7 +39,7 @@ class ParsedCommand {
      * @param InputInterface $input
      * @param OutputInterface $output
      */
-    function __construct($callable = null, array $params = null, InputInterface $input, OutputInterface $output) {
+    function __construct($callable, array $params, InputInterface $input, OutputInterface $output) {
         $this->callable = $callable;
         $this->input = $input;
         $this->output = $output;

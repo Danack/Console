@@ -11,6 +11,8 @@
 
 namespace Danack\Console\Input;
 
+use Danack\Console\NotEnoughArgumentsException;
+
 /**
  * Input is the base class for all concrete Input classes.
  *
@@ -74,7 +76,20 @@ abstract class Input implements InputInterface
     public function validate()
     {
         if (count($this->arguments) < $this->definition->getArgumentRequiredCount()) {
-            throw new \RuntimeException('Not enough arguments.');
+
+            $message = sprintf(
+                'Not enough arguments need %d have %d. Args are: ',
+                $this->definition->getArgumentRequiredCount(),
+                count($this->arguments)
+            );
+
+            foreach ($this->definition->getArguments() as $argument) {
+                $message .= $argument->getName() . " ";
+            }
+
+            $message .= '.\n';
+
+            throw new NotEnoughArgumentsException($message);
         }
     }
 
