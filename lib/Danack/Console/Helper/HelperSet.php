@@ -101,6 +101,7 @@ class HelperSet implements \IteratorAggregate
         return $this->command;
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->helpers);
