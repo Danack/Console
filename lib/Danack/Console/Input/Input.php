@@ -39,7 +39,7 @@ abstract class Input implements InputInterface
      *
      * @param InputDefinition $definition A InputDefinition instance
      */
-    public function __construct(InputDefinition $definition = null)
+    public function __construct(InputDefinition|null $definition = null)
     {
         if (null === $definition) {
             $this->definition = new InputDefinition();

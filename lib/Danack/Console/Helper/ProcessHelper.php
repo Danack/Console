@@ -35,7 +35,7 @@ class ProcessHelper extends Helper
      *
      * @return Process The process that ran
      */
-    public function run(OutputInterface $output, $cmd, $error = null, $callback = null, $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE)
+    public function run(OutputInterface|null $output, $cmd, $error = null, $callback = null, $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE)
     {
         $formatter = $this->getHelperSet()->get('debug_formatter');
 

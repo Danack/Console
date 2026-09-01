@@ -27,7 +27,7 @@ abstract class Helper implements HelperInterface
      *
      * @param HelperSet $helperSet A HelperSet instance
      */
-    public function setHelperSet(HelperSet $helperSet = null)
+    public function setHelperSet(HelperSet|null $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }

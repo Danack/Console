@@ -37,7 +37,7 @@ class StringInput extends ArgvInput
      *
      * @api
      */
-    public function __construct($input, InputDefinition $definition = null)
+    public function __construct($input, InputDefinition|null $definition = null)
     {
         parent::__construct(array(), null);
 

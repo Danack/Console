@@ -51,7 +51,7 @@ class ArgvInput extends Input
      *
      * @api
      */
-    public function __construct(array $argv = null, InputDefinition $definition = null)
+    public function __construct(array $argv = null, InputDefinition|null $definition = null)
     {
         if (null === $argv) {
             $argv = $_SERVER['argv'];

@@ -27,7 +27,7 @@ interface HelperInterface
      *
      * @api
      */
-    public function setHelperSet(HelperSet $helperSet = null);
+    public function setHelperSet(HelperSet|null $helperSet = null);
 
     /**
      * Gets the helper set associated with this helper.

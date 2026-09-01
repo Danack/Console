@@ -103,7 +103,7 @@ class Application
      *
      * @api
      */
-    public function parseCommandLine(InputInterface $input = null, OutputInterface $output = null)
+    public function parseCommandLine(InputInterface|null $input = null, OutputInterface|null $output = null)
     {
         if (null === $input) {
             $input = new ArgvInput();
