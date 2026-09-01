@@ -99,7 +99,7 @@ class DialogHelper extends InputAwareHelper
      *
      * @throws \RuntimeException If there is no data to read in the input stream
      */
-    public function ask(OutputInterface $output, $question, $default = null, array $autocomplete = null)
+    public function ask(OutputInterface $output, $question, $default = null, array|null $autocomplete = null)
     {
         if ($this->input && !$this->input->isInteractive()) {
             return $default;
@@ -336,7 +336,7 @@ class DialogHelper extends InputAwareHelper
      *
      * @throws \Exception When any of the validators return an error
      */
-    public function askAndValidate(OutputInterface $output, $question, $validator, $attempts = false, $default = null, array $autocomplete = null)
+    public function askAndValidate(OutputInterface $output, $question, $validator, $attempts = false, $default = null, array|null $autocomplete = null)
     {
         $that = $this;
 

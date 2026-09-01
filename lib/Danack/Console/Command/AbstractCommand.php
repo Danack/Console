@@ -89,7 +89,7 @@ abstract class AbstractCommand implements Dispatchable
      *
      * @api
      */
-    public function setApplication(Application $application = null)
+    public function setApplication(Application|null $application = null)
     {
         $this->application = $application;
         if ($application) {
